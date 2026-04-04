@@ -506,3 +506,83 @@
     animation: none !important;
     transition: none !important;
 }
+
+/* ============================================================================
+   CLASSIC MOTION OVERRIDE
+   Subtle animation language, no neon/glitch emphasis
+   ============================================================================ */
+
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lineClear {
+    0% {
+        opacity: 0.85;
+        transform: scaleY(1);
+        background: rgba(226, 239, 181, 0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleY(0.75);
+        background: rgba(226, 239, 181, 0.1);
+    }
+}
+
+@keyframes lockFlash {
+    0% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.15);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+@keyframes actionPop {
+    0% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.92);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes actionFade {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-14px);
+    }
+}
+
+.logo-glow,
+.glitch-text,
+.glitch-color,
+.b2b-indicator,
+.high-score-celebrate,
+.perfect-clear,
+.perfect-clear-text {
+    animation: none !important;
+    text-shadow: none !important;
+}
+
+.btn:hover,
+.menu-item:hover,
+.pause-btn:hover {
+    animation: none;
+}

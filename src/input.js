@@ -51,6 +51,7 @@ class InputManager {
     #keyStates = new Map();
     #dasTimers = new Map();
     #arrTimers = new Map();
+    #touchControlStates = new Map();
     #callbacks = new Map();
     #touchStartX = 0;
     #touchStartY = 0;
@@ -70,6 +71,7 @@ class InputManager {
 
         this.#setupKeyboard();
         this.#setupTouch();
+        this.#setupTouchButtons();
         this.#setupGamepad();
     }
 
@@ -97,8 +99,11 @@ class InputManager {
         this.#enabled = enabled;
         if (!enabled) {
             this.#keyStates.clear();
+            this.#dasTimers.forEach((timer) => clearTimeout(timer));
+            this.#arrTimers.forEach((timer) => clearInterval(timer));
             this.#dasTimers.clear();
             this.#arrTimers.clear();
+            this.#releaseTouchControls();
         }
     }
 
@@ -320,6 +325,110 @@ class InputManager {
     }
 
     /**
+     * Setup on-screen touch controls
+     */
+    #setupTouchButtons() {
+        const buttons = document.querySelectorAll("[data-touch-action]");
+        if (buttons.length === 0) return;
+
+        const startPress = (button) => {
+            if (!this.#enabled) return;
+
+            const action = button.dataset.touchAction;
+            if (!action) return;
+
+            this.#stopTouchRepeat(button);
+            this.#handleAction(action);
+
+            if (button.dataset.repeat !== "true") return;
+
+            const repeatDelay = Number.parseInt(
+                button.dataset.repeatDelay || "140",
+                10,
+            );
+            const repeatRate = Number.parseInt(
+                button.dataset.repeatRate || "70",
+                10,
+            );
+
+            const state = {
+                timeoutId: null,
+                intervalId: null,
+            };
+
+            state.timeoutId = setTimeout(() => {
+                state.intervalId = setInterval(() => {
+                    if (this.#enabled) {
+                        this.#handleAction(action);
+                    }
+                }, repeatRate);
+            }, repeatDelay);
+
+            this.#touchControlStates.set(button, state);
+        };
+
+        const stopPress = (button) => {
+            this.#stopTouchRepeat(button);
+        };
+
+        buttons.forEach((button) => {
+            button.addEventListener("pointerdown", (event) => {
+                event.preventDefault();
+                startPress(button);
+            });
+
+            button.addEventListener("pointerup", () => {
+                stopPress(button);
+            });
+
+            button.addEventListener("pointercancel", () => {
+                stopPress(button);
+            });
+
+            button.addEventListener("pointerleave", () => {
+                stopPress(button);
+            });
+
+            button.addEventListener("contextmenu", (event) => {
+                event.preventDefault();
+            });
+        });
+
+        window.addEventListener("pointerup", () =>
+            this.#releaseTouchControls(),
+        );
+        window.addEventListener("blur", () => this.#releaseTouchControls());
+    }
+
+    /**
+     * Stop repeat timers for one touch button
+     * @param {HTMLElement} button - Button element
+     */
+    #stopTouchRepeat(button) {
+        const state = this.#touchControlStates.get(button);
+        if (!state) return;
+
+        if (state.timeoutId !== null) {
+            clearTimeout(state.timeoutId);
+        }
+
+        if (state.intervalId !== null) {
+            clearInterval(state.intervalId);
+        }
+
+        this.#touchControlStates.delete(button);
+    }
+
+    /**
+     * Stop repeat timers for all touch buttons
+     */
+    #releaseTouchControls() {
+        this.#touchControlStates.forEach((_, button) => {
+            this.#stopTouchRepeat(button);
+        });
+    }
+
+    /**
      * Handle touch start
      * @param {TouchEvent} event - Touch event
      */
@@ -511,6 +620,7 @@ class InputManager {
         // Clear all timers
         this.#dasTimers.forEach((timer) => clearTimeout(timer));
         this.#arrTimers.forEach((timer) => clearInterval(timer));
+        this.#releaseTouchControls();
         this.#dasTimers.clear();
         this.#arrTimers.clear();
         this.#keyStates.clear();

@@ -2,10 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
             name="description"
             content="RetroTetris - A fully-featured browser Tetris implementing the official Tetris Guideline"
@@ -30,44 +27,80 @@
          NAVBAR
          ==================================================================== -->
         <nav class="rt-navbar">
-            <div class="rt-navbar-logo">RETROTETRIS</div>
+            <div class="rt-navbar-logo">TETRIS CLASSIC</div>
             <div class="rt-navbar-controls">
                 <div class="rt-lang-switcher">
                     <button class="rt-lang-btn" data-lang="pl">PL</button>
-                    <button class="rt-lang-btn active" data-lang="en">EN</button>
+                    <button class="rt-lang-btn active" data-lang="en">
+                        EN
+                    </button>
                     <button class="rt-lang-btn" data-lang="de">DE</button>
                     <button class="rt-lang-btn" data-lang="ja">JA</button>
                 </div>
-                <button class="rt-theme-btn" id="theme-toggle" title="Toggle theme">🌙</button>
+                <button
+                    class="rt-theme-btn"
+                    id="theme-toggle"
+                    title="Switch theme"
+                >
+                    🌙
+                </button>
             </div>
         </nav>
-        
+
         <!-- TOAST CONTAINER -->
         <div class="rt-toast-container" id="toast-container"></div>
-        
+
         <div id="app" data-theme="dark" data-lang="en">
             <!-- ====================================================================
          MAIN MENU SCREEN
          ==================================================================== -->
             <div id="menu-screen" class="screen active">
                 <div class="menu-logo">
-                    <h1 class="logo-glow">RETRO TETRIS</h1>
+                    <h1 class="logo-glow">TETRIS</h1>
+                    <p class="menu-subtitle">
+                        Classic stacker. Modern browser flow.
+                    </p>
                 </div>
                 <div class="menu-items">
-                    <button class="menu-item selected" data-action="play" data-i18n="menu.play">
+                    <button
+                        class="menu-item selected"
+                        data-action="play"
+                        data-i18n="menu.play"
+                    >
                         Play
                     </button>
-                    <button class="menu-item" data-action="settings" data-i18n="menu.settings">
+                    <button
+                        class="menu-item"
+                        data-action="settings"
+                        data-i18n="menu.settings"
+                    >
                         Settings
                     </button>
-                    <button class="menu-item" data-action="controls" data-i18n="menu.controls">
+                    <button
+                        class="menu-item"
+                        data-action="controls"
+                        data-i18n="menu.controls"
+                    >
                         Controls
                     </button>
-                    <button class="menu-item" data-action="leaderboard" data-i18n="menu.scores">
+                    <button
+                        class="menu-item"
+                        data-action="leaderboard"
+                        data-i18n="menu.scores"
+                    >
                         High Scores
                     </button>
-                    <button class="menu-item" data-action="stats" data-i18n="menu.stats">Stats</button>
+                    <button
+                        class="menu-item"
+                        data-action="stats"
+                        data-i18n="menu.stats"
+                    >
+                        Stats
+                    </button>
                 </div>
+                <p class="menu-hint">
+                    Arrows to navigate • Enter to confirm • Space to hard drop
+                </p>
             </div>
 
             <!-- ====================================================================
@@ -77,26 +110,36 @@
                 <h2 data-i18n="menu.modes">Select Mode</h2>
                 <div class="mode-items">
                     <div class="mode-item selected" data-action="marathon">
-                        <span class="mode-name" data-i18n="modes.marathon.name">Marathon</span>
+                        <span class="mode-name" data-i18n="modes.marathon.name"
+                            >Marathon</span
+                        >
                         <span class="mode-desc" data-i18n="modes.marathon.desc"
                             >Classic endless mode. Score as high as you
                             can!</span
                         >
                     </div>
                     <div class="mode-item" data-action="sprint">
-                        <span class="mode-name" data-i18n="modes.sprint.name">Sprint (40 Lines)</span>
+                        <span class="mode-name" data-i18n="modes.sprint.name"
+                            >Sprint (40 Lines)</span
+                        >
                         <span class="mode-desc" data-i18n="modes.sprint.desc"
                             >Clear 40 lines as fast as possible</span
                         >
                     </div>
                     <div class="mode-item" data-action="ultra">
-                        <span class="mode-name" data-i18n="modes.ultra.name">Ultra (2 Minutes)</span>
+                        <span class="mode-name" data-i18n="modes.ultra.name"
+                            >Ultra (2 Minutes)</span
+                        >
                         <span class="mode-desc" data-i18n="modes.ultra.desc"
                             >Score as high as you can in 2 minutes</span
                         >
                     </div>
                 </div>
-                <button class="back-btn" data-action="back" data-i18n="modes.back">
+                <button
+                    class="back-btn"
+                    data-action="back"
+                    data-i18n="modes.back"
+                >
                     ← Back to Menu
                 </button>
             </div>
@@ -108,15 +151,38 @@
                 <h2 data-i18n="settings.title">Settings</h2>
                 <div class="settings-content">
                     <div class="setting-row">
-                        <span class="setting-label" data-i18n="settings.theme">Theme</span>
+                        <span class="setting-label" data-i18n="settings.theme"
+                            >Theme</span
+                        >
                         <div class="setting-toggle-group">
-                            <button class="setting-toggle-btn active" data-theme-choice="dark" data-i18n="settings.theme_dark">Dark</button>
-                            <button class="setting-toggle-btn" data-theme-choice="light" data-i18n="settings.theme_light">Light</button>
+                            <button
+                                class="setting-toggle-btn active"
+                                data-theme-choice="dark"
+                                data-i18n="settings.theme_dark"
+                            >
+                                Dark
+                            </button>
+                            <button
+                                class="setting-toggle-btn"
+                                data-theme-choice="light"
+                                data-i18n="settings.theme_light"
+                            >
+                                Light
+                            </button>
                         </div>
                     </div>
                     <div class="setting-row">
-                        <span class="setting-label" data-i18n="settings.language">Language</span>
-                        <select id="lang-select" class="setting-select">
+                        <span
+                            class="setting-label"
+                            data-i18n="settings.language"
+                            >Language</span
+                        >
+                        <select
+                            id="lang-select"
+                            class="setting-select"
+                            title="Language selection"
+                            aria-label="Language selection"
+                        >
                             <option value="pl">Polski</option>
                             <option value="en" selected>English</option>
                             <option value="de">Deutsch</option>
@@ -138,6 +204,8 @@
                             min="0"
                             max="300"
                             value="167"
+                            title="DAS slider"
+                            aria-label="DAS slider"
                         />
                     </div>
                     <div class="setting-row">
@@ -155,19 +223,45 @@
                             min="0"
                             max="100"
                             value="33"
+                            title="ARR slider"
+                            aria-label="ARR slider"
                         />
                     </div>
                     <div class="setting-row">
-                        <span class="setting-label" data-i18n="settings.ghost">Ghost Piece</span>
-                        <input type="checkbox" id="ghost-toggle" checked />
+                        <span class="setting-label" data-i18n="settings.ghost"
+                            >Ghost Piece</span
+                        >
+                        <input
+                            type="checkbox"
+                            id="ghost-toggle"
+                            checked
+                            title="Ghost piece"
+                            aria-label="Ghost piece"
+                        />
                     </div>
                     <div class="setting-row">
-                        <span class="setting-label" data-i18n="settings.music">Music</span>
-                        <input type="checkbox" id="music-toggle" checked />
+                        <span class="setting-label" data-i18n="settings.music"
+                            >Music</span
+                        >
+                        <input
+                            type="checkbox"
+                            id="music-toggle"
+                            checked
+                            title="Music"
+                            aria-label="Music"
+                        />
                     </div>
                     <div class="setting-row">
-                        <span class="setting-label" data-i18n="settings.sfx">Sound Effects</span>
-                        <input type="checkbox" id="sfx-toggle" checked />
+                        <span class="setting-label" data-i18n="settings.sfx"
+                            >Sound Effects</span
+                        >
+                        <input
+                            type="checkbox"
+                            id="sfx-toggle"
+                            checked
+                            title="Sound effects"
+                            aria-label="Sound effects"
+                        />
                     </div>
                     <div class="setting-row">
                         <span class="setting-label">Volume</span>
@@ -177,10 +271,16 @@
                             min="0"
                             max="100"
                             value="70"
+                            title="Volume slider"
+                            aria-label="Volume slider"
                         />
                     </div>
                 </div>
-                <button class="back-btn" data-action="back" data-i18n="settings.back">
+                <button
+                    class="back-btn"
+                    data-action="back"
+                    data-i18n="settings.back"
+                >
                     ← Back to Menu
                 </button>
             </div>
@@ -227,8 +327,25 @@
                         <span data-i18n="controls.restart">Restart</span>
                         <span class="control-key">R</span>
                     </div>
+                    <div class="control-divider">Mobile + Web</div>
+                    <div class="control-row">
+                        <span>Touch buttons</span>
+                        <span class="control-key">Move / Rotate / Drop</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Swipe up / down</span>
+                        <span class="control-key">Hard / Soft Drop</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Tap board left / right</span>
+                        <span class="control-key">Rotate CCW / CW</span>
+                    </div>
                 </div>
-                <button class="back-btn" data-action="back" data-i18n="controls.back">
+                <button
+                    class="back-btn"
+                    data-action="back"
+                    data-i18n="controls.back"
+                >
                     ← Back to Menu
                 </button>
             </div>
@@ -239,13 +356,25 @@
             <div id="leaderboard-screen" class="screen">
                 <h2 data-i18n="scores.title">High Scores</h2>
                 <div class="leaderboard-tabs">
-                    <button class="leaderboard-tab active" data-mode="marathon" data-i18n="modes.marathon.name">
+                    <button
+                        class="leaderboard-tab active"
+                        data-mode="marathon"
+                        data-i18n="modes.marathon.name"
+                    >
                         Marathon
                     </button>
-                    <button class="leaderboard-tab" data-mode="sprint" data-i18n="modes.sprint.name">
+                    <button
+                        class="leaderboard-tab"
+                        data-mode="sprint"
+                        data-i18n="modes.sprint.name"
+                    >
                         Sprint
                     </button>
-                    <button class="leaderboard-tab" data-mode="ultra" data-i18n="modes.ultra.name">
+                    <button
+                        class="leaderboard-tab"
+                        data-mode="ultra"
+                        data-i18n="modes.ultra.name"
+                    >
                         Ultra
                     </button>
                 </div>
@@ -257,7 +386,11 @@
                     <div id="sprint-scores" class="scores-container"></div>
                     <div id="ultra-scores" class="scores-container"></div>
                 </div>
-                <button class="back-btn" data-action="back" data-i18n="scores.back">
+                <button
+                    class="back-btn"
+                    data-action="back"
+                    data-i18n="scores.back"
+                >
                     ← Back to Menu
                 </button>
             </div>
@@ -271,19 +404,27 @@
                     <div class="stats-grid">
                         <div class="stat-item">
                             <div class="stat-value" id="stat-games">0</div>
-                            <div class="stat-label" data-i18n="stats.games">Games Played</div>
+                            <div class="stat-label" data-i18n="stats.games">
+                                Games Played
+                            </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-lines">0</div>
-                            <div class="stat-label" data-i18n="stats.lines">Lines Cleared</div>
+                            <div class="stat-label" data-i18n="stats.lines">
+                                Lines Cleared
+                            </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-time">00:00</div>
-                            <div class="stat-label" data-i18n="stats.time">Time Played</div>
+                            <div class="stat-label" data-i18n="stats.time">
+                                Time Played
+                            </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-pieces">0</div>
-                            <div class="stat-label" data-i18n="stats.pieces">Pieces Placed</div>
+                            <div class="stat-label" data-i18n="stats.pieces">
+                                Pieces Placed
+                            </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-max-score">
@@ -297,15 +438,23 @@
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-tspins">0</div>
-                            <div class="stat-label" data-i18n="stats.tspins">T-Spins</div>
+                            <div class="stat-label" data-i18n="stats.tspins">
+                                T-Spins
+                            </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-tetrises">0</div>
-                            <div class="stat-label" data-i18n="stats.tetrises">Tetrises</div>
+                            <div class="stat-label" data-i18n="stats.tetrises">
+                                Tetrises
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button class="back-btn" data-action="back" data-i18n="stats.back">
+                <button
+                    class="back-btn"
+                    data-action="back"
+                    data-i18n="stats.back"
+                >
                     ← Back to Menu
                 </button>
             </div>
@@ -318,7 +467,9 @@
                     <!-- Left Panel: Hold, Score, Level -->
                     <div class="left-panel">
                         <div class="panel-section">
-                            <div class="panel-label">Hold</div>
+                            <div class="panel-label" data-i18n="game.hold">
+                                Hold
+                            </div>
                             <div class="hold-container">
                                 <canvas
                                     id="hold-canvas"
@@ -329,7 +480,9 @@
                         </div>
 
                         <div class="panel-section score-container">
-                            <div class="panel-label">Score</div>
+                            <div class="panel-label" data-i18n="game.score">
+                                Score
+                            </div>
                             <div class="panel-value" id="score-value">
                                 000000
                             </div>
@@ -337,7 +490,9 @@
                         </div>
 
                         <div class="panel-section">
-                            <div class="panel-label">Level</div>
+                            <div class="panel-label" data-i18n="game.level">
+                                Level
+                            </div>
                             <div class="panel-value" id="level-value">1</div>
                             <div class="level-progress">
                                 <div
@@ -348,14 +503,18 @@
                         </div>
 
                         <div class="panel-section">
-                            <div class="panel-label">Time</div>
+                            <div class="panel-label" data-i18n="game.time">
+                                Time
+                            </div>
                             <div class="panel-value" id="time-value">
                                 00:00.00
                             </div>
                         </div>
 
                         <div class="panel-section combo-container">
-                            <div class="panel-label">Combo</div>
+                            <div class="panel-label" data-i18n="game.combo">
+                                Combo
+                            </div>
                             <div class="combo-value" id="combo-value">x0</div>
                         </div>
                     </div>
@@ -369,7 +528,9 @@
                     <!-- Right Panel: Next Queue, Lines -->
                     <div class="right-panel">
                         <div class="panel-section">
-                            <div class="panel-label">Next</div>
+                            <div class="panel-label" data-i18n="game.next">
+                                Next
+                            </div>
                             <div class="next-container">
                                 <canvas
                                     id="next-canvas"
@@ -380,9 +541,89 @@
                         </div>
 
                         <div class="panel-section">
-                            <div class="panel-label">Lines</div>
+                            <div class="panel-label" data-i18n="game.lines">
+                                Lines
+                            </div>
                             <div class="panel-value" id="lines-value">0</div>
                         </div>
+                    </div>
+                </div>
+
+                <div
+                    class="touch-controls"
+                    id="touch-controls"
+                    aria-label="Touch controls"
+                >
+                    <div class="touch-row">
+                        <button
+                            type="button"
+                            class="touch-btn touch-btn-wide"
+                            data-touch-action="hold"
+                            aria-label="Hold"
+                        >
+                            HOLD
+                        </button>
+                        <button
+                            type="button"
+                            class="touch-btn"
+                            data-touch-action="rotateCCW"
+                            aria-label="Rotate counter clockwise"
+                        >
+                            ↺
+                        </button>
+                        <button
+                            type="button"
+                            class="touch-btn"
+                            data-touch-action="rotateCW"
+                            aria-label="Rotate clockwise"
+                        >
+                            ↻
+                        </button>
+                        <button
+                            type="button"
+                            class="touch-btn touch-btn-wide"
+                            data-touch-action="hardDrop"
+                            aria-label="Hard drop"
+                        >
+                            DROP
+                        </button>
+                    </div>
+                    <div class="touch-row">
+                        <button
+                            type="button"
+                            class="touch-btn touch-btn-main"
+                            data-touch-action="moveLeft"
+                            data-repeat="true"
+                            aria-label="Move left"
+                        >
+                            ◀
+                        </button>
+                        <button
+                            type="button"
+                            class="touch-btn touch-btn-main"
+                            data-touch-action="softDrop"
+                            data-repeat="true"
+                            aria-label="Soft drop"
+                        >
+                            ▼
+                        </button>
+                        <button
+                            type="button"
+                            class="touch-btn touch-btn-main"
+                            data-touch-action="moveRight"
+                            data-repeat="true"
+                            aria-label="Move right"
+                        >
+                            ▶
+                        </button>
+                        <button
+                            type="button"
+                            class="touch-btn"
+                            data-touch-action="pause"
+                            aria-label="Pause"
+                        >
+                            II
+                        </button>
                     </div>
                 </div>
 
@@ -390,16 +631,32 @@
                 <div id="pause-overlay">
                     <h2 class="pause-title" data-i18n="pause.title">Paused</h2>
                     <div class="pause-menu">
-                        <button class="pause-btn" data-action="resume" data-i18n="pause.resume">
+                        <button
+                            class="pause-btn"
+                            data-action="resume"
+                            data-i18n="pause.resume"
+                        >
                             Resume
                         </button>
-                        <button class="pause-btn" data-action="restart" data-i18n="pause.restart">
+                        <button
+                            class="pause-btn"
+                            data-action="restart"
+                            data-i18n="pause.restart"
+                        >
                             Restart
                         </button>
-                        <button class="pause-btn" data-action="settings" data-i18n="pause.settings">
+                        <button
+                            class="pause-btn"
+                            data-action="settings"
+                            data-i18n="pause.settings"
+                        >
                             Settings
                         </button>
-                        <button class="pause-btn" data-action="quit" data-i18n="pause.menu">
+                        <button
+                            class="pause-btn"
+                            data-action="quit"
+                            data-i18n="pause.menu"
+                        >
                             Quit to Menu
                         </button>
                     </div>
@@ -410,39 +667,73 @@
          GAME OVER SCREEN
          ==================================================================== -->
             <div id="gameOver-screen" class="screen">
-                <h1 class="game-over-title" data-i18n="gameover.title">Game Over</h1>
-                <div id="high-score-notice" data-i18n="gameover.new_record">🎉 New High Score!</div>
+                <h1 class="game-over-title" data-i18n="gameover.title">
+                    Game Over
+                </h1>
+                <div id="high-score-notice" data-i18n="gameover.new_record">
+                    New High Score!
+                </div>
                 <div class="game-over-stats">
                     <div class="game-over-stat">
                         <div class="game-over-stat-value" id="final-score">
                             000000
                         </div>
-                        <div class="game-over-stat-label" data-i18n="gameover.score">Score</div>
+                        <div
+                            class="game-over-stat-label"
+                            data-i18n="gameover.score"
+                        >
+                            Score
+                        </div>
                     </div>
                     <div class="game-over-stat">
                         <div class="game-over-stat-value" id="final-level">
                             1
                         </div>
-                        <div class="game-over-stat-label" data-i18n="gameover.level">Level</div>
+                        <div
+                            class="game-over-stat-label"
+                            data-i18n="gameover.level"
+                        >
+                            Level
+                        </div>
                     </div>
                     <div class="game-over-stat">
                         <div class="game-over-stat-value" id="final-lines">
                             0
                         </div>
-                        <div class="game-over-stat-label" data-i18n="gameover.lines">Lines</div>
+                        <div
+                            class="game-over-stat-label"
+                            data-i18n="gameover.lines"
+                        >
+                            Lines
+                        </div>
                     </div>
                     <div class="game-over-stat">
                         <div class="game-over-stat-value" id="final-time">
                             00:00
                         </div>
-                        <div class="game-over-stat-label" data-i18n="gameover.time">Time</div>
+                        <div
+                            class="game-over-stat-label"
+                            data-i18n="gameover.time"
+                        >
+                            Time
+                        </div>
                     </div>
                 </div>
                 <div class="game-over-buttons">
-                    <button class="btn btn-primary" data-action="restart" data-i18n="gameover.play_again">
+                    <button
+                        class="btn btn-primary"
+                        data-action="restart"
+                        data-i18n="gameover.play_again"
+                    >
                         Play Again
                     </button>
-                    <button class="btn" data-action="quit" data-i18n="gameover.menu">Menu</button>
+                    <button
+                        class="btn"
+                        data-action="quit"
+                        data-i18n="gameover.menu"
+                    >
+                        Menu
+                    </button>
                 </div>
             </div>
 
@@ -474,273 +765,522 @@
         <script src="src/audio.js"></script>
         <script src="src/storage.js"></script>
         <script src="src/ui.js"></script>
-        
+
         <!-- i18n Module (inline for single-file compatibility) -->
         <script>
             const TRANSLATIONS = {
-              pl: {
-                app: { title: 'RetroTetris', tagline: 'Przeglądarkowa klasyka — nowa era' },
-                nav: { settings: 'Ustawienia', controls: 'Sterowanie', scores: 'Wyniki' },
-                menu: {
-                  play: 'Graj', modes: 'Tryby gry', scores: 'Wysokie wyniki',
-                  settings: 'Ustawienia', controls: 'Sterowanie', stats: 'Statystyki',
+                pl: {
+                    app: {
+                        title: "RetroTetris",
+                        tagline: "Przeglądarkowa klasyka — nowa era",
+                    },
+                    nav: {
+                        settings: "Ustawienia",
+                        controls: "Sterowanie",
+                        scores: "Wyniki",
+                    },
+                    menu: {
+                        play: "Graj",
+                        modes: "Tryby gry",
+                        scores: "Wysokie wyniki",
+                        settings: "Ustawienia",
+                        controls: "Sterowanie",
+                        stats: "Statystyki",
+                    },
+                    modes: {
+                        marathon: {
+                            name: "Maraton",
+                            desc: "Graj bez limitu czasu. Poziom rośnie co 10 linii.",
+                        },
+                        sprint: {
+                            name: "Sprint",
+                            desc: "Skasuj 40 linii w jak najkrótszym czasie.",
+                        },
+                        ultra: {
+                            name: "Ultra",
+                            desc: "2 minuty. Maksymalny wynik punktowy.",
+                        },
+                        back: "← Powrót",
+                    },
+                    game: {
+                        hold: "Trzymaj",
+                        score: "Wynik",
+                        level: "Poziom",
+                        time: "Czas",
+                        next: "Następne",
+                        lines: "Linie",
+                    },
+                    pause: {
+                        title: "PAUZA",
+                        resume: "Wznów",
+                        restart: "Restart",
+                        settings: "Ustawienia",
+                        menu: "Menu",
+                    },
+                    gameover: {
+                        title: "GAME OVER",
+                        new_record: "🎉 NOWY REKORD!",
+                        score: "Wynik",
+                        level: "Poziom",
+                        lines: "Linie",
+                        time: "Czas",
+                        initials: "Wpisz inicjały",
+                        play_again: "Jeszcze raz",
+                        menu: "Menu",
+                    },
+                    settings: {
+                        title: "Ustawienia",
+                        theme: "Motyw",
+                        theme_dark: "Ciemny",
+                        theme_light: "Jasny",
+                        language: "Język",
+                        ghost: "Ghost piece",
+                        music: "Muzyka",
+                        sfx: "Efekty dźwiękowe",
+                        das: "DAS",
+                        arr: "ARR",
+                        back: "← Powrót",
+                    },
+                    controls: {
+                        title: "Sterowanie",
+                        move_left: "Ruch w lewo",
+                        move_right: "Ruch w prawo",
+                        rotate_cw: "Rotacja CW",
+                        rotate_ccw: "Rotacja CCW",
+                        hard_drop: "Hard Drop",
+                        soft_drop: "Soft Drop",
+                        hold: "Trzymaj",
+                        pause: "Pauza",
+                        restart: "Restart",
+                        back: "← Powrót",
+                    },
+                    scores: { title: "Wysokie wyniki", back: "← Powrót" },
+                    stats: {
+                        title: "Statystyki",
+                        games: "Rozegrane gry",
+                        lines: "Skasowane linie",
+                        time: "Czas gry",
+                        tetrises: "Tetrisy",
+                        tspins: "T-Spiny",
+                        pieces: "Położone klocki",
+                        back: "← Powrót",
+                    },
+                    toast: {
+                        theme_dark: "Ciemny motyw",
+                        theme_light: "Jasny motyw",
+                        lang_changed: "Język zmieniony",
+                    },
                 },
-                modes: {
-                  marathon: { name: 'Maraton', desc: 'Graj bez limitu czasu. Poziom rośnie co 10 linii.' },
-                  sprint: { name: 'Sprint', desc: 'Skasuj 40 linii w jak najkrótszym czasie.' },
-                  ultra: { name: 'Ultra', desc: '2 minuty. Maksymalny wynik punktowy.' },
-                  back: '← Powrót',
+                en: {
+                    app: {
+                        title: "RetroTetris",
+                        tagline: "Browser classic — new era",
+                    },
+                    nav: {
+                        settings: "Settings",
+                        controls: "Controls",
+                        scores: "Scores",
+                    },
+                    menu: {
+                        play: "Play",
+                        modes: "Game Modes",
+                        scores: "High Scores",
+                        settings: "Settings",
+                        controls: "Controls",
+                        stats: "Statistics",
+                    },
+                    modes: {
+                        marathon: {
+                            name: "Marathon",
+                            desc: "Play without time limit. Level up every 10 lines.",
+                        },
+                        sprint: {
+                            name: "Sprint",
+                            desc: "Clear 40 lines as fast as possible.",
+                        },
+                        ultra: {
+                            name: "Ultra",
+                            desc: "2 minutes. Maximum point score.",
+                        },
+                        back: "← Back",
+                    },
+                    game: {
+                        hold: "Hold",
+                        score: "Score",
+                        level: "Level",
+                        time: "Time",
+                        next: "Next",
+                        lines: "Lines",
+                    },
+                    pause: {
+                        title: "PAUSED",
+                        resume: "Resume",
+                        restart: "Restart",
+                        settings: "Settings",
+                        menu: "Menu",
+                    },
+                    gameover: {
+                        title: "GAME OVER",
+                        new_record: "🎉 NEW RECORD!",
+                        score: "Score",
+                        level: "Level",
+                        lines: "Lines",
+                        time: "Time",
+                        initials: "Enter initials",
+                        play_again: "Play Again",
+                        menu: "Menu",
+                    },
+                    settings: {
+                        title: "Settings",
+                        theme: "Theme",
+                        theme_dark: "Dark",
+                        theme_light: "Light",
+                        language: "Language",
+                        ghost: "Ghost piece",
+                        music: "Music",
+                        sfx: "Sound Effects",
+                        das: "DAS",
+                        arr: "ARR",
+                        back: "← Back",
+                    },
+                    controls: {
+                        title: "Controls",
+                        move_left: "Move left",
+                        move_right: "Move right",
+                        rotate_cw: "Rotate CW",
+                        rotate_ccw: "Rotate CCW",
+                        hard_drop: "Hard Drop",
+                        soft_drop: "Soft Drop",
+                        hold: "Hold",
+                        pause: "Pause",
+                        restart: "Restart",
+                        back: "← Back",
+                    },
+                    scores: { title: "High Scores", back: "← Back" },
+                    stats: {
+                        title: "Statistics",
+                        games: "Games played",
+                        lines: "Lines cleared",
+                        time: "Time played",
+                        tetrises: "Tetrises",
+                        tspins: "T-Spins",
+                        pieces: "Pieces placed",
+                        back: "← Back",
+                    },
+                    toast: {
+                        theme_dark: "Dark theme",
+                        theme_light: "Light theme",
+                        lang_changed: "Language changed",
+                    },
                 },
-                game: {
-                  hold: 'Trzymaj', score: 'Wynik', level: 'Poziom',
-                  time: 'Czas', next: 'Następne', lines: 'Linie',
+                de: {
+                    app: {
+                        title: "RetroTetris",
+                        tagline: "Browser-Klassiker — neue Ära",
+                    },
+                    nav: {
+                        settings: "Einstellungen",
+                        controls: "Steuerung",
+                        scores: "Punkte",
+                    },
+                    menu: {
+                        play: "Spielen",
+                        modes: "Spielmodi",
+                        scores: "Highscores",
+                        settings: "Einstellungen",
+                        controls: "Steuerung",
+                        stats: "Statistiken",
+                    },
+                    modes: {
+                        marathon: {
+                            name: "Marathon",
+                            desc: "Ohne Zeitlimit spielen. Level steigt alle 10 Linien.",
+                        },
+                        sprint: {
+                            name: "Sprint",
+                            desc: "40 Linien so schnell wie möglich räumen.",
+                        },
+                        ultra: {
+                            name: "Ultra",
+                            desc: "2 Minuten. Maximale Punktzahl.",
+                        },
+                        back: "← Zurück",
+                    },
+                    game: {
+                        hold: "Halten",
+                        score: "Punkte",
+                        level: "Level",
+                        time: "Zeit",
+                        next: "Nächste",
+                        lines: "Linien",
+                    },
+                    pause: {
+                        title: "PAUSE",
+                        resume: "Fortsetzen",
+                        restart: "Neustart",
+                        settings: "Einstellungen",
+                        menu: "Menü",
+                    },
+                    gameover: {
+                        title: "SPIEL VORBEI",
+                        new_record: "🎉 NEUER REKORD!",
+                        score: "Punkte",
+                        level: "Level",
+                        lines: "Linien",
+                        time: "Zeit",
+                        initials: "Initialen eingeben",
+                        play_again: "Nochmal",
+                        menu: "Menü",
+                    },
+                    settings: {
+                        title: "Einstellungen",
+                        theme: "Design",
+                        theme_dark: "Dunkel",
+                        theme_light: "Hell",
+                        language: "Sprache",
+                        ghost: "Geist-Stück",
+                        music: "Musik",
+                        sfx: "Soundeffekte",
+                        das: "DAS",
+                        arr: "ARR",
+                        back: "← Zurück",
+                    },
+                    controls: {
+                        title: "Steuerung",
+                        move_left: "Links bewegen",
+                        move_right: "Rechts bewegen",
+                        rotate_cw: "Drehen CW",
+                        rotate_ccw: "Drehen CCW",
+                        hard_drop: "Hard Drop",
+                        soft_drop: "Soft Drop",
+                        hold: "Halten",
+                        pause: "Pause",
+                        restart: "Neustart",
+                        back: "← Zurück",
+                    },
+                    scores: { title: "Highscores", back: "← Zurück" },
+                    stats: {
+                        title: "Statistiken",
+                        games: "Gespielte Spiele",
+                        lines: "Gelöschte Linien",
+                        time: "Spielzeit",
+                        tetrises: "Tetrisse",
+                        tspins: "T-Spins",
+                        pieces: "Platzierte Teile",
+                        back: "← Zurück",
+                    },
+                    toast: {
+                        theme_dark: "Dunkles Design",
+                        theme_light: "Helles Design",
+                        lang_changed: "Sprache geändert",
+                    },
                 },
-                pause: {
-                  title: 'PAUZA', resume: 'Wznów', restart: 'Restart',
-                  settings: 'Ustawienia', menu: 'Menu',
+                ja: {
+                    app: {
+                        title: "レトロテトリス",
+                        tagline: "ブラウザクラシック — 新時代",
+                    },
+                    nav: {
+                        settings: "設定",
+                        controls: "操作",
+                        scores: "スコア",
+                    },
+                    menu: {
+                        play: "プレイ",
+                        modes: "ゲームモード",
+                        scores: "ハイスコア",
+                        settings: "設定",
+                        controls: "操作説明",
+                        stats: "統計",
+                    },
+                    modes: {
+                        marathon: {
+                            name: "マラソン",
+                            desc: "時間制限なし。10ラインごとにレベルアップ。",
+                        },
+                        sprint: {
+                            name: "スプリント",
+                            desc: "40ラインを最速でクリア。",
+                        },
+                        ultra: {
+                            name: "ウルトラ",
+                            desc: "2分間。最大ポイントを獲得。",
+                        },
+                        back: "← 戻る",
+                    },
+                    game: {
+                        hold: "ホールド",
+                        score: "スコア",
+                        level: "レベル",
+                        time: "タイム",
+                        next: "ネクスト",
+                        lines: "ライン",
+                    },
+                    pause: {
+                        title: "一時停止",
+                        resume: "再開",
+                        restart: "リスタート",
+                        settings: "設定",
+                        menu: "メニュー",
+                    },
+                    gameover: {
+                        title: "ゲームオーバー",
+                        new_record: "🎉 新記録！",
+                        score: "スコア",
+                        level: "レベル",
+                        lines: "ライン",
+                        time: "タイム",
+                        initials: "イニシャルを入力",
+                        play_again: "もう一度",
+                        menu: "メニュー",
+                    },
+                    settings: {
+                        title: "設定",
+                        theme: "テーマ",
+                        theme_dark: "ダーク",
+                        theme_light: "ライト",
+                        language: "言語",
+                        ghost: "ゴーストピース",
+                        music: "BGM",
+                        sfx: "効果音",
+                        das: "DAS",
+                        arr: "ARR",
+                        back: "← 戻る",
+                    },
+                    controls: {
+                        title: "操作説明",
+                        move_left: "左移動",
+                        move_right: "右移動",
+                        rotate_cw: "右回転",
+                        rotate_ccw: "左回転",
+                        hard_drop: "ハードドロップ",
+                        soft_drop: "ソフトドロップ",
+                        hold: "ホールド",
+                        pause: "一時停止",
+                        restart: "リスタート",
+                        back: "← 戻る",
+                    },
+                    scores: { title: "ハイスコア", back: "← 戻る" },
+                    stats: {
+                        title: "統計",
+                        games: "プレイ回数",
+                        lines: "消去ライン",
+                        time: "プレイ時間",
+                        tetrises: "テトリス",
+                        tspins: "Tスピン",
+                        pieces: "配置ピース",
+                        back: "← 戻る",
+                    },
+                    toast: {
+                        theme_dark: "ダークテーマ",
+                        theme_light: "ライトテーマ",
+                        lang_changed: "言語が変更されました",
+                    },
                 },
-                gameover: {
-                  title: 'GAME OVER', new_record: '🎉 NOWY REKORD!',
-                  score: 'Wynik', level: 'Poziom', lines: 'Linie', time: 'Czas',
-                  initials: 'Wpisz inicjały', play_again: 'Jeszcze raz', menu: 'Menu',
-                },
-                settings: {
-                  title: 'Ustawienia', theme: 'Motyw', theme_dark: 'Ciemny', theme_light: 'Jasny',
-                  language: 'Język', ghost: 'Ghost piece', music: 'Muzyka', sfx: 'Efekty dźwiękowe',
-                  das: 'DAS', arr: 'ARR', back: '← Powrót',
-                },
-                controls: {
-                  title: 'Sterowanie', move_left: 'Ruch w lewo', move_right: 'Ruch w prawo',
-                  rotate_cw: 'Rotacja CW', rotate_ccw: 'Rotacja CCW',
-                  hard_drop: 'Hard Drop', soft_drop: 'Soft Drop',
-                  hold: 'Trzymaj', pause: 'Pauza', restart: 'Restart', back: '← Powrót',
-                },
-                scores: { title: 'Wysokie wyniki', back: '← Powrót' },
-                stats: {
-                  title: 'Statystyki', games: 'Rozegrane gry', lines: 'Skasowane linie',
-                  time: 'Czas gry', tetrises: 'Tetrisy', tspins: 'T-Spiny', pieces: 'Położone klocki',
-                  back: '← Powrót',
-                },
-                toast: { theme_dark: 'Ciemny motyw', theme_light: 'Jasny motyw', lang_changed: 'Język zmieniony' },
-              },
-              en: {
-                app: { title: 'RetroTetris', tagline: 'Browser classic — new era' },
-                nav: { settings: 'Settings', controls: 'Controls', scores: 'Scores' },
-                menu: {
-                  play: 'Play', modes: 'Game Modes', scores: 'High Scores',
-                  settings: 'Settings', controls: 'Controls', stats: 'Statistics',
-                },
-                modes: {
-                  marathon: { name: 'Marathon', desc: 'Play without time limit. Level up every 10 lines.' },
-                  sprint: { name: 'Sprint', desc: 'Clear 40 lines as fast as possible.' },
-                  ultra: { name: 'Ultra', desc: '2 minutes. Maximum point score.' },
-                  back: '← Back',
-                },
-                game: {
-                  hold: 'Hold', score: 'Score', level: 'Level',
-                  time: 'Time', next: 'Next', lines: 'Lines',
-                },
-                pause: {
-                  title: 'PAUSED', resume: 'Resume', restart: 'Restart',
-                  settings: 'Settings', menu: 'Menu',
-                },
-                gameover: {
-                  title: 'GAME OVER', new_record: '🎉 NEW RECORD!',
-                  score: 'Score', level: 'Level', lines: 'Lines', time: 'Time',
-                  initials: 'Enter initials', play_again: 'Play Again', menu: 'Menu',
-                },
-                settings: {
-                  title: 'Settings', theme: 'Theme', theme_dark: 'Dark', theme_light: 'Light',
-                  language: 'Language', ghost: 'Ghost piece', music: 'Music', sfx: 'Sound Effects',
-                  das: 'DAS', arr: 'ARR', back: '← Back',
-                },
-                controls: {
-                  title: 'Controls', move_left: 'Move left', move_right: 'Move right',
-                  rotate_cw: 'Rotate CW', rotate_ccw: 'Rotate CCW',
-                  hard_drop: 'Hard Drop', soft_drop: 'Soft Drop',
-                  hold: 'Hold', pause: 'Pause', restart: 'Restart', back: '← Back',
-                },
-                scores: { title: 'High Scores', back: '← Back' },
-                stats: {
-                  title: 'Statistics', games: 'Games played', lines: 'Lines cleared',
-                  time: 'Time played', tetrises: 'Tetrises', tspins: 'T-Spins', pieces: 'Pieces placed',
-                  back: '← Back',
-                },
-                toast: { theme_dark: 'Dark theme', theme_light: 'Light theme', lang_changed: 'Language changed' },
-              },
-              de: {
-                app: { title: 'RetroTetris', tagline: 'Browser-Klassiker — neue Ära' },
-                nav: { settings: 'Einstellungen', controls: 'Steuerung', scores: 'Punkte' },
-                menu: {
-                  play: 'Spielen', modes: 'Spielmodi', scores: 'Highscores',
-                  settings: 'Einstellungen', controls: 'Steuerung', stats: 'Statistiken',
-                },
-                modes: {
-                  marathon: { name: 'Marathon', desc: 'Ohne Zeitlimit spielen. Level steigt alle 10 Linien.' },
-                  sprint: { name: 'Sprint', desc: '40 Linien so schnell wie möglich räumen.' },
-                  ultra: { name: 'Ultra', desc: '2 Minuten. Maximale Punktzahl.' },
-                  back: '← Zurück',
-                },
-                game: {
-                  hold: 'Halten', score: 'Punkte', level: 'Level',
-                  time: 'Zeit', next: 'Nächste', lines: 'Linien',
-                },
-                pause: {
-                  title: 'PAUSE', resume: 'Fortsetzen', restart: 'Neustart',
-                  settings: 'Einstellungen', menu: 'Menü',
-                },
-                gameover: {
-                  title: 'SPIEL VORBEI', new_record: '🎉 NEUER REKORD!',
-                  score: 'Punkte', level: 'Level', lines: 'Linien', time: 'Zeit',
-                  initials: 'Initialen eingeben', play_again: 'Nochmal', menu: 'Menü',
-                },
-                settings: {
-                  title: 'Einstellungen', theme: 'Design', theme_dark: 'Dunkel', theme_light: 'Hell',
-                  language: 'Sprache', ghost: 'Geist-Stück', music: 'Musik', sfx: 'Soundeffekte',
-                  das: 'DAS', arr: 'ARR', back: '← Zurück',
-                },
-                controls: {
-                  title: 'Steuerung', move_left: 'Links bewegen', move_right: 'Rechts bewegen',
-                  rotate_cw: 'Drehen CW', rotate_ccw: 'Drehen CCW',
-                  hard_drop: 'Hard Drop', soft_drop: 'Soft Drop',
-                  hold: 'Halten', pause: 'Pause', restart: 'Neustart', back: '← Zurück',
-                },
-                scores: { title: 'Highscores', back: '← Zurück' },
-                stats: {
-                  title: 'Statistiken', games: 'Gespielte Spiele', lines: 'Gelöschte Linien',
-                  time: 'Spielzeit', tetrises: 'Tetrisse', tspins: 'T-Spins', pieces: 'Platzierte Teile',
-                  back: '← Zurück',
-                },
-                toast: { theme_dark: 'Dunkles Design', theme_light: 'Helles Design', lang_changed: 'Sprache geändert' },
-              },
-              ja: {
-                app: { title: 'レトロテトリス', tagline: 'ブラウザクラシック — 新時代' },
-                nav: { settings: '設定', controls: '操作', scores: 'スコア' },
-                menu: {
-                  play: 'プレイ', modes: 'ゲームモード', scores: 'ハイスコア',
-                  settings: '設定', controls: '操作説明', stats: '統計',
-                },
-                modes: {
-                  marathon: { name: 'マラソン', desc: '時間制限なし。10ラインごとにレベルアップ。' },
-                  sprint: { name: 'スプリント', desc: '40ラインを最速でクリア。' },
-                  ultra: { name: 'ウルトラ', desc: '2分間。最大ポイントを獲得。' },
-                  back: '← 戻る',
-                },
-                game: {
-                  hold: 'ホールド', score: 'スコア', level: 'レベル',
-                  time: 'タイム', next: 'ネクスト', lines: 'ライン',
-                },
-                pause: {
-                  title: '一時停止', resume: '再開', restart: 'リスタート',
-                  settings: '設定', menu: 'メニュー',
-                },
-                gameover: {
-                  title: 'ゲームオーバー', new_record: '🎉 新記録！',
-                  score: 'スコア', level: 'レベル', lines: 'ライン', time: 'タイム',
-                  initials: 'イニシャルを入力', play_again: 'もう一度', menu: 'メニュー',
-                },
-                settings: {
-                  title: '設定', theme: 'テーマ', theme_dark: 'ダーク', theme_light: 'ライト',
-                  language: '言語', ghost: 'ゴーストピース', music: 'BGM', sfx: '効果音',
-                  das: 'DAS', arr: 'ARR', back: '← 戻る',
-                },
-                controls: {
-                  title: '操作説明', move_left: '左移動', move_right: '右移動',
-                  rotate_cw: '右回転', rotate_ccw: '左回転',
-                  hard_drop: 'ハードドロップ', soft_drop: 'ソフトドロップ',
-                  hold: 'ホールド', pause: '一時停止', restart: 'リスタート', back: '← 戻る',
-                },
-                scores: { title: 'ハイスコア', back: '← 戻る' },
-                stats: {
-                  title: '統計', games: 'プレイ回数', lines: '消去ライン',
-                  time: 'プレイ時間', tetrises: 'テトリス', tspins: 'Tスピン', pieces: '配置ピース',
-                  back: '← 戻る',
-                },
-                toast: { theme_dark: 'ダークテーマ', theme_light: 'ライトテーマ', lang_changed: '言語が変更されました' },
-              },
             };
 
             class I18n {
-              static #locale = 'en';
-              static #translations = TRANSLATIONS.en;
-              static get locale() { return this.#locale; }
+                static #locale = "en";
+                static #translations = TRANSLATIONS.en;
+                static get locale() {
+                    return this.#locale;
+                }
 
-              static load(locale) {
-                if (!TRANSLATIONS[locale]) locale = 'en';
-                this.#locale = locale;
-                this.#translations = TRANSLATIONS[locale];
-                this.#updateDOM();
-              }
+                static load(locale) {
+                    if (!TRANSLATIONS[locale]) locale = "en";
+                    this.#locale = locale;
+                    this.#translations = TRANSLATIONS[locale];
+                    this.#updateDOM();
+                }
 
-              static t(key, vars = {}) {
-                const str = this.#get(key) || key;
-                if (typeof str !== 'string') return key;
-                return str.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? `{${k}}`);
-              }
+                static t(key, vars = {}) {
+                    const str = this.#get(key) || key;
+                    if (typeof str !== "string") return key;
+                    return str.replace(
+                        /\{(\w+)\}/g,
+                        (_, k) => vars[k] ?? `{${k}}`,
+                    );
+                }
 
-              static #get(key) {
-                return key.split('.').reduce((obj, k) => obj?.[k], this.#translations);
-              }
+                static #get(key) {
+                    return key
+                        .split(".")
+                        .reduce((obj, k) => obj?.[k], this.#translations);
+                }
 
-              static #updateDOM() {
-                document.querySelectorAll('[data-i18n]').forEach(el => {
-                  const key = el.dataset.i18n;
-                  const val = this.t(key);
-                  if (el.dataset.i18nAttr) el.setAttribute(el.dataset.i18nAttr, val);
-                  else el.textContent = val;
-                });
-                document.documentElement.setAttribute('lang', this.#locale);
-              }
+                static #updateDOM() {
+                    document.querySelectorAll("[data-i18n]").forEach((el) => {
+                        const key = el.dataset.i18n;
+                        const val = this.t(key);
+                        if (el.dataset.i18nAttr)
+                            el.setAttribute(el.dataset.i18nAttr, val);
+                        else el.textContent = val;
+                    });
+                    document.documentElement.setAttribute("lang", this.#locale);
+                }
             }
 
             // Theme Manager
             class ThemeManager {
-              static #current = 'dark';
+                static #current = "dark";
 
-              static init() {
-                const saved = localStorage.getItem('rt_theme') || 'dark';
-                this.set(saved);
-              }
+                static init() {
+                    const saved = localStorage.getItem("rt_theme") || "dark";
+                    this.set(saved);
+                }
 
-              static get current() { return this.#current; }
+                static get current() {
+                    return this.#current;
+                }
 
-              static set(theme) {
-                this.#current = theme;
-                document.getElementById('app').setAttribute('data-theme', theme);
-                document.body.style.background = getComputedStyle(document.documentElement)
-                  .getPropertyValue('--rt-bg-base').trim();
-                localStorage.setItem('rt_theme', theme);
-                
-                // Update UI
-                const toggleBtn = document.getElementById('theme-toggle');
-                if (toggleBtn) toggleBtn.textContent = theme === 'dark' ? '🌙' : '☀️';
-                
-                document.querySelectorAll('[data-theme-choice]').forEach(btn => {
-                  btn.classList.toggle('active', btn.dataset.themeChoice === theme);
-                });
-              }
+                static set(theme) {
+                    this.#current = theme;
+                    document
+                        .getElementById("app")
+                        .setAttribute("data-theme", theme);
+                    document.body.style.background = getComputedStyle(
+                        document.documentElement,
+                    )
+                        .getPropertyValue("--rt-bg-base")
+                        .trim();
+                    localStorage.setItem("rt_theme", theme);
 
-              static toggle() {
-                this.set(this.#current === 'dark' ? 'light' : 'dark');
-              }
+                    // Update UI
+                    const toggleBtn = document.getElementById("theme-toggle");
+                    if (toggleBtn)
+                        toggleBtn.textContent = theme === "dark" ? "🌙" : "☀️";
+
+                    document
+                        .querySelectorAll("[data-theme-choice]")
+                        .forEach((btn) => {
+                            btn.classList.toggle(
+                                "active",
+                                btn.dataset.themeChoice === theme,
+                            );
+                        });
+                }
+
+                static toggle() {
+                    this.set(this.#current === "dark" ? "light" : "dark");
+                }
             }
 
             // Toast notifications
-            function showToast(message, type = 'info') {
-              const container = document.getElementById('toast-container');
-              const toast = document.createElement('div');
-              toast.className = `rt-toast ${type}`;
-              toast.textContent = message;
-              container.appendChild(toast);
-              
-              requestAnimationFrame(() => toast.classList.add('show'));
-              setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 300);
-              }, 2500);
+            function showToast(message, type = "info") {
+                const container = document.getElementById("toast-container");
+                const toast = document.createElement("div");
+                toast.className = `rt-toast ${type}`;
+                toast.textContent = message;
+                container.appendChild(toast);
+
+                requestAnimationFrame(() => toast.classList.add("show"));
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                    setTimeout(() => toast.remove(), 300);
+                }, 2500);
             }
         </script>
-        
+
         <script>
             "use strict";
 
@@ -762,10 +1302,10 @@
                 constructor() {
                     // Initialize theme and i18n first
                     ThemeManager.init();
-                    const savedLang = localStorage.getItem('rt_lang') || 'en';
+                    const savedLang = localStorage.getItem("rt_lang") || "en";
                     I18n.load(savedLang);
                     this.#updateLangButtons(savedLang);
-                    
+
                     this.#storage = new StorageManager();
                     this.#audio = new AudioEngine();
                     this.#engine = new GameEngine();
@@ -1030,38 +1570,50 @@
                         .getElementById("theme-toggle")
                         ?.addEventListener("click", () => {
                             ThemeManager.toggle();
-                            const msg = I18n.t(ThemeManager.current === 'dark' ? 'toast.theme_dark' : 'toast.theme_light');
+                            const msg = I18n.t(
+                                ThemeManager.current === "dark"
+                                    ? "toast.theme_dark"
+                                    : "toast.theme_light",
+                            );
                             showToast(msg);
                         });
 
                     // Theme toggle buttons in settings
-                    document.querySelectorAll('[data-theme-choice]').forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            ThemeManager.set(btn.dataset.themeChoice);
-                            const msg = I18n.t(btn.dataset.themeChoice === 'dark' ? 'toast.theme_dark' : 'toast.theme_light');
-                            showToast(msg);
+                    document
+                        .querySelectorAll("[data-theme-choice]")
+                        .forEach((btn) => {
+                            btn.addEventListener("click", () => {
+                                ThemeManager.set(btn.dataset.themeChoice);
+                                const msg = I18n.t(
+                                    btn.dataset.themeChoice === "dark"
+                                        ? "toast.theme_dark"
+                                        : "toast.theme_light",
+                                );
+                                showToast(msg);
+                            });
                         });
-                    });
 
                     // Language switcher in navbar
-                    document.querySelectorAll('.rt-lang-btn').forEach(btn => {
-                        btn.addEventListener('click', () => {
+                    document.querySelectorAll(".rt-lang-btn").forEach((btn) => {
+                        btn.addEventListener("click", () => {
                             const lang = btn.dataset.lang;
                             I18n.load(lang);
-                            localStorage.setItem('rt_lang', lang);
+                            localStorage.setItem("rt_lang", lang);
                             this.#updateLangButtons(lang);
-                            showToast(I18n.t('toast.lang_changed'));
+                            showToast(I18n.t("toast.lang_changed"));
                         });
                     });
 
                     // Language select in settings
-                    document.getElementById('lang-select')?.addEventListener('change', (e) => {
-                        const lang = e.target.value;
-                        I18n.load(lang);
-                        localStorage.setItem('rt_lang', lang);
-                        this.#updateLangButtons(lang);
-                        showToast(I18n.t('toast.lang_changed'));
-                    });
+                    document
+                        .getElementById("lang-select")
+                        ?.addEventListener("change", (e) => {
+                            const lang = e.target.value;
+                            I18n.load(lang);
+                            localStorage.setItem("rt_lang", lang);
+                            this.#updateLangButtons(lang);
+                            showToast(I18n.t("toast.lang_changed"));
+                        });
 
                     // Initialize audio on first user interaction
                     document.addEventListener(
@@ -1126,10 +1678,13 @@
                  * Update language button states
                  */
                 #updateLangButtons(lang) {
-                    document.querySelectorAll('.rt-lang-btn').forEach(btn => {
-                        btn.classList.toggle('active', btn.dataset.lang === lang);
+                    document.querySelectorAll(".rt-lang-btn").forEach((btn) => {
+                        btn.classList.toggle(
+                            "active",
+                            btn.dataset.lang === lang,
+                        );
                     });
-                    const langSelect = document.getElementById('lang-select');
+                    const langSelect = document.getElementById("lang-select");
                     if (langSelect) langSelect.value = lang;
                 }
 
