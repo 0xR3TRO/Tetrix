@@ -28,6 +28,9 @@ const DEFAULT_SETTINGS = {
     musicVolume: 0.4,
     sfxVolume: 1.0,
     theme: "dark",
+    musicEnabled: true,
+    sfxEnabled: true,
+    musicStyle: "classic",
 };
 
 /** Default stats */

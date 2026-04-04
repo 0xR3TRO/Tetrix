@@ -16,8 +16,7 @@
  */
 class UIManager {
     #game;
-    #currentScreen = "menu";
-    #selectedMenuItem = 0;
+    #currentScreen = "modeSelect";
     #selectedModeItem = 0;
     #nameInput = ["A", "A", "A"];
     #namePosition = 0;
@@ -48,7 +47,7 @@ class UIManager {
         // Button click handlers
         document.querySelectorAll("[data-action]").forEach((btn) => {
             btn.addEventListener("click", (e) => {
-                const action = e.target.dataset.action;
+                const action = e.currentTarget.dataset.action;
                 this.#handleAction(action);
             });
         });
@@ -62,9 +61,6 @@ class UIManager {
         if (this.#currentScreen === "game") return;
 
         switch (this.#currentScreen) {
-            case "menu":
-                this.#handleMenuInput(event);
-                break;
             case "modeSelect":
                 this.#handleModeSelectInput(event);
                 break;
@@ -81,43 +77,8 @@ class UIManager {
             case "controls":
             case "stats":
                 if (event.code === "Escape" || event.code === "Enter") {
-                    this.showScreen("menu");
+                    this.showScreen("modeSelect");
                 }
-                break;
-        }
-    }
-
-    /**
-     * Handle main menu input
-     * @param {KeyboardEvent} event - Keyboard event
-     */
-    #handleMenuInput(event) {
-        const menuItems = [
-            "play",
-            "settings",
-            "controls",
-            "leaderboard",
-            "stats",
-        ];
-
-        switch (event.code) {
-            case "ArrowUp":
-                this.#selectedMenuItem =
-                    (this.#selectedMenuItem - 1 + menuItems.length) %
-                    menuItems.length;
-                this.#updateMenuSelection();
-                this.#game.audio?.playMenuMove();
-                break;
-            case "ArrowDown":
-                this.#selectedMenuItem =
-                    (this.#selectedMenuItem + 1) % menuItems.length;
-                this.#updateMenuSelection();
-                this.#game.audio?.playMenuMove();
-                break;
-            case "Enter":
-            case "Space":
-                this.#handleAction(menuItems[this.#selectedMenuItem]);
-                this.#game.audio?.playMenuSelect();
                 break;
         }
     }
@@ -148,7 +109,7 @@ class UIManager {
                 this.#game.audio?.playMenuSelect();
                 break;
             case "Escape":
-                this.showScreen("menu");
+                this.showScreen("modeSelect");
                 break;
         }
     }
@@ -164,7 +125,7 @@ class UIManager {
                 this.#restartGame();
                 break;
             case "Escape":
-                this.showScreen("menu");
+                this.showScreen("modeSelect");
                 break;
         }
     }
@@ -209,7 +170,7 @@ class UIManager {
      */
     #handleSettingsInput(event) {
         if (event.code === "Escape") {
-            this.showScreen("menu");
+            this.showScreen("modeSelect");
         }
     }
 
@@ -232,9 +193,6 @@ class UIManager {
      */
     #handleAction(action) {
         switch (action) {
-            case "play":
-                this.showScreen("modeSelect");
-                break;
             case "settings":
                 this.showScreen("settings");
                 break;
@@ -252,6 +210,10 @@ class UIManager {
             case "marathon":
             case "sprint":
             case "ultra":
+                this.#selectedModeItem = ["marathon", "sprint", "ultra"].indexOf(
+                    action,
+                );
+                this.#updateModeSelection();
                 this.#startGame(action);
                 break;
             case "resume":
@@ -262,10 +224,10 @@ class UIManager {
                 this.#restartGame();
                 break;
             case "quit":
-                this.showScreen("menu");
+                this.showScreen("modeSelect");
                 break;
             case "back":
-                this.showScreen("menu");
+                this.showScreen("modeSelect");
                 break;
         }
     }
@@ -392,15 +354,6 @@ class UIManager {
      */
     hidePause() {
         document.getElementById("pause-overlay")?.classList.remove("active");
-    }
-
-    /**
-     * Update menu selection display
-     */
-    #updateMenuSelection() {
-        document.querySelectorAll(".menu-item").forEach((item, i) => {
-            item.classList.toggle("selected", i === this.#selectedMenuItem);
-        });
     }
 
     /**

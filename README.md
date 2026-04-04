@@ -27,6 +27,8 @@ Open `index.html` in your browser to play!
 - **Multi-language** — Polish, English, German, Japanese (i18n)
 - **Dark / Light theme** — Persistent theme preference
 - **Advanced UI** — Redesigned pause menu, panel sections, and touch controls
+- **Instant launcher** — Mode cards replace the old menu with quick actions
+- **Theme & music styles** — Dark, Light, Neon, Sunset palettes plus Classic / Pulse / Ambient music vibes
 
 ## 🎮 Controls
 
@@ -114,6 +116,17 @@ Key UI components:
 | Touch controls     | 3D-depth buttons with press feedback and ripple effect    |
 | Header buttons     | Rounded, lift-on-hover, smooth active state               |
 | Toast notifications| Slide-in alerts for theme and language changes            |
+
+### Customization & vibes
+
+- Toggle themes instantly from the navbar or launcher (Dark, Light, Neon, Sunset).
+- Pick a music vibe: **Classic (Korobeiniki)**, **Pulse runner**, or **Ambient drift**.
+- Quick chips on the launcher jump straight to Settings, Controls, High Scores, and Stats.
+- Theme and music preferences persist between sessions.
+
+## 📘 Advanced Guide
+
+Want more? Check `docs/ADVANCED_GUIDE.md` for deeper explanations of the UI system, music styles, theming tokens, and troubleshooting tips.
 
 ## 📊 Tetris Guideline Compliance
 
