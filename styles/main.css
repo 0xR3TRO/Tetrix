@@ -1,47 +1,180 @@
 /* ============================================================================
-   RetroTetris - Main Styles
-   Layout, typography, and base styling
+   RetroTetris - Main Styles v2.0
+   Layout, typography, and base styling with theme support
    ============================================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap");
 
 /* ============================================================================
-   CSS VARIABLES
+   DESIGN TOKENS - DARK THEME (Default)
+   ============================================================================ */
+
+:root,
+[data-theme="dark"] {
+    /* Backgrounds */
+    --rt-bg-base: #08080f;
+    --rt-bg-elevated: #0f0f1a;
+    --rt-bg-surface: #141425;
+    --rt-bg-overlay: #1a1a2e;
+    --rt-bg-input: #0c0c18;
+
+    /* Borders */
+    --rt-border-subtle: #1e1e3a;
+    --rt-border-default: #2a2a4a;
+    --rt-border-strong: #3a3a6a;
+    --rt-border-accent: #7c3aed;
+
+    /* Text */
+    --rt-text-primary: #e2e8f0;
+    --rt-text-secondary: #94a3b8;
+    --rt-text-muted: #475569;
+    --rt-text-accent: #a78bfa;
+
+    /* Accents */
+    --rt-accent-primary: #7c3aed;
+    --rt-accent-secondary: #06b6d4;
+    --rt-accent-warning: #f59e0b;
+    --rt-accent-danger: #ef4444;
+    --rt-accent-success: #10b981;
+
+    /* Tetromino colors */
+    --rt-piece-I: #00f0f0;
+    --rt-piece-O: #f0f000;
+    --rt-piece-T: #a000f0;
+    --rt-piece-S: #00f000;
+    --rt-piece-Z: #f00000;
+    --rt-piece-J: #4444ff;
+    --rt-piece-L: #f0a000;
+
+    /* Effects */
+    --rt-glow-sm: 0 0 6px currentColor;
+    --rt-glow-md: 0 0 6px currentColor, 0 0 12px currentColor;
+    --rt-glow-lg: 0 0 8px currentColor, 0 0 16px currentColor, 0 0 32px currentColor;
+    --rt-blur-overlay: blur(8px) saturate(180%);
+
+    /* Legacy compatibility */
+    --bg-primary: var(--rt-bg-base);
+    --bg-secondary: var(--rt-bg-elevated);
+    --bg-board: var(--rt-bg-input);
+    --bg-cell: var(--rt-bg-overlay);
+    --border-color: var(--rt-border-default);
+    --accent-primary: var(--rt-accent-primary);
+    --accent-secondary: var(--rt-accent-secondary);
+    --text-primary: var(--rt-text-primary);
+    --text-secondary: var(--rt-text-secondary);
+    --text-accent: var(--rt-text-accent);
+    --glow-intensity: var(--rt-glow-md);
+    --color-I: var(--rt-piece-I);
+    --color-O: var(--rt-piece-O);
+    --color-T: var(--rt-piece-T);
+    --color-S: var(--rt-piece-S);
+    --color-Z: var(--rt-piece-Z);
+    --color-J: var(--rt-piece-J);
+    --color-L: var(--rt-piece-L);
+}
+
+/* ============================================================================
+   DESIGN TOKENS - LIGHT THEME
+   ============================================================================ */
+
+[data-theme="light"] {
+    /* Backgrounds */
+    --rt-bg-base: #f0f2f8;
+    --rt-bg-elevated: #e8eaf4;
+    --rt-bg-surface: #dde0f0;
+    --rt-bg-overlay: #d4d8ec;
+    --rt-bg-input: #e4e7f4;
+
+    /* Borders */
+    --rt-border-subtle: #dde0f0;
+    --rt-border-default: #c0c4dc;
+    --rt-border-strong: #a8aed0;
+    --rt-border-accent: #7c3aed;
+
+    /* Text */
+    --rt-text-primary: #1e1b4b;
+    --rt-text-secondary: #4338ca;
+    --rt-text-muted: #6d6aaa;
+    --rt-text-accent: #7c3aed;
+
+    /* Tetromino colors (darker for light bg) */
+    --rt-piece-I: #00a8a8;
+    --rt-piece-O: #a8a800;
+    --rt-piece-T: #6800a8;
+    --rt-piece-S: #008800;
+    --rt-piece-Z: #a80000;
+    --rt-piece-J: #0000c0;
+    --rt-piece-L: #a87000;
+
+    /* Reduced glow for light mode */
+    --rt-glow-sm: none;
+    --rt-glow-md: 0 0 4px rgba(124, 58, 237, 0.3);
+    --rt-glow-lg: 0 0 8px rgba(124, 58, 237, 0.4);
+
+    /* Legacy compatibility */
+    --bg-primary: var(--rt-bg-base);
+    --bg-secondary: var(--rt-bg-elevated);
+    --bg-board: var(--rt-bg-input);
+    --bg-cell: var(--rt-bg-overlay);
+    --border-color: var(--rt-border-default);
+    --text-primary: var(--rt-text-primary);
+    --text-secondary: var(--rt-text-secondary);
+    --glow-intensity: var(--rt-glow-md);
+    --color-I: var(--rt-piece-I);
+    --color-O: var(--rt-piece-O);
+    --color-T: var(--rt-piece-T);
+    --color-S: var(--rt-piece-S);
+    --color-Z: var(--rt-piece-Z);
+    --color-J: var(--rt-piece-J);
+    --color-L: var(--rt-piece-L);
+}
+
+/* ============================================================================
+   TYPOGRAPHY & TIMING TOKENS
    ============================================================================ */
 
 :root {
-    /* Background and surfaces */
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #111118;
-    --bg-board: #0d0d14;
-    --bg-cell: #1a1a2e;
-    --border-color: #2a2a4a;
+    /* Fonts */
+    --rt-font-display: "Orbitron", "Courier New", monospace;
+    --rt-font-mono: "Share Tech Mono", "Courier New", monospace;
+    --font-display: var(--rt-font-display);
+    --font-mono: var(--rt-font-mono);
 
-    /* Tetromino colors */
-    --color-I: #00f0f0;
-    --color-O: #f0f000;
-    --color-T: #a000f0;
-    --color-S: #00f000;
-    --color-Z: #f00000;
-    --color-J: #0000f0;
-    --color-L: #f0a000;
+    /* Text sizes */
+    --rt-text-xs: 10px;
+    --rt-text-sm: 12px;
+    --rt-text-base: 14px;
+    --rt-text-lg: 18px;
+    --rt-text-xl: 24px;
+    --rt-text-2xl: 32px;
+    --rt-text-hero: 48px;
 
-    /* UI accents */
-    --accent-primary: #7c3aed;
-    --accent-secondary: #06b6d4;
-    --text-primary: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --text-accent: #7c3aed;
+    /* Spacing */
+    --rt-letter-tight: 1px;
+    --rt-letter-normal: 2px;
+    --rt-letter-wide: 3px;
 
-    /* Effects */
-    --glow-intensity: 0 0 10px currentColor, 0 0 20px currentColor;
+    /* Border radius */
+    --rt-radius-sm: 4px;
+    --rt-radius-md: 8px;
+    --rt-radius-lg: 12px;
+    --rt-radius-pill: 999px;
+
+    /* Timing */
+    --rt-duration-instant: 80ms;
+    --rt-duration-fast: 150ms;
+    --rt-duration-normal: 250ms;
+    --rt-duration-slow: 400ms;
+    --rt-duration-dramatic: 800ms;
+
+    --rt-ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+    --rt-ease-in: cubic-bezier(0.4, 0.0, 1.0, 1);
+    --rt-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Cell size */
     --cell-size: 30px;
     --board-width: calc(var(--cell-size) * 10);
     --board-height: calc(var(--cell-size) * 20);
-
-    /* Typography */
-    --font-display: "Orbitron", sans-serif;
-    --font-mono: "Share Tech Mono", monospace;
 }
 
 /* ============================================================================
@@ -64,7 +197,7 @@ body {
 
 body {
     font-family: var(--font-mono);
-    background: var(--bg-primary);
+    background: var(--rt-bg-base);
     color: var(--text-primary);
     display: flex;
     align-items: center;
@@ -114,6 +247,7 @@ h3 {
 #app {
     width: 100%;
     height: 100%;
+    padding-top: 50px; /* Account for navbar */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,10 +260,10 @@ h3 {
 
 .screen {
     position: absolute;
-    top: 0;
+    top: 50px; /* Account for navbar */
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 50px);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -353,6 +487,49 @@ input[type="checkbox"] {
     width: 20px;
     height: 20px;
     accent-color: var(--accent-primary);
+}
+
+.setting-toggle-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.setting-toggle-btn {
+    font-family: var(--rt-font-mono);
+    font-size: var(--rt-text-sm);
+    padding: 0.35rem 0.75rem;
+    background: var(--rt-bg-surface);
+    border: 1px solid var(--rt-border-default);
+    color: var(--rt-text-secondary);
+    cursor: pointer;
+    transition: all var(--rt-duration-fast) var(--rt-ease-out);
+    border-radius: var(--rt-radius-sm);
+}
+
+.setting-toggle-btn:hover {
+    border-color: var(--rt-border-strong);
+    color: var(--rt-text-primary);
+}
+
+.setting-toggle-btn.active {
+    background: var(--rt-accent-primary);
+    border-color: var(--rt-accent-primary);
+    color: white;
+}
+
+.setting-select {
+    font-family: var(--rt-font-mono);
+    font-size: var(--rt-text-sm);
+    padding: 0.35rem 0.75rem;
+    background: var(--rt-bg-surface);
+    border: 1px solid var(--rt-border-default);
+    color: var(--rt-text-primary);
+    border-radius: var(--rt-radius-sm);
+    cursor: pointer;
+}
+
+.setting-select:hover {
+    border-color: var(--rt-border-strong);
 }
 
 .control-row {
@@ -585,10 +762,166 @@ input[type="checkbox"] {
 }
 
 /* ============================================================================
+   NAVBAR
+   ============================================================================ */
+
+.rt-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--rt-bg-elevated);
+    border-bottom: 1px solid var(--rt-border-default);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    z-index: 1000;
+}
+
+.rt-navbar-logo {
+    font-family: var(--rt-font-display);
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, var(--rt-accent-primary), var(--rt-accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: var(--rt-letter-wide);
+}
+
+.rt-navbar-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.rt-lang-btn,
+.rt-theme-btn {
+    background: var(--rt-bg-surface);
+    border: 1px solid var(--rt-border-default);
+    color: var(--rt-text-secondary);
+    font-family: var(--rt-font-mono);
+    font-size: var(--rt-text-sm);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--rt-radius-sm);
+    cursor: pointer;
+    transition: all var(--rt-duration-fast) var(--rt-ease-out);
+}
+
+.rt-lang-btn:hover,
+.rt-theme-btn:hover {
+    background: var(--rt-bg-overlay);
+    border-color: var(--rt-border-strong);
+    color: var(--rt-text-primary);
+}
+
+.rt-lang-btn.active {
+    background: var(--rt-accent-primary);
+    border-color: var(--rt-accent-primary);
+    color: white;
+}
+
+.rt-theme-btn {
+    font-size: 1.1rem;
+    padding: 0.35rem 0.5rem;
+}
+
+/* ============================================================================
+   TOAST NOTIFICATIONS
+   ============================================================================ */
+
+.rt-toast-container {
+    position: fixed;
+    top: 60px;
+    right: 1rem;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rt-toast {
+    background: var(--rt-bg-elevated);
+    border: 1px solid var(--rt-border-default);
+    border-left: 4px solid var(--rt-accent-primary);
+    padding: 0.75rem 1rem;
+    border-radius: var(--rt-radius-sm);
+    font-size: var(--rt-text-sm);
+    color: var(--rt-text-primary);
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all var(--rt-duration-normal) var(--rt-ease-spring);
+}
+
+.rt-toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.rt-toast.success { border-left-color: var(--rt-accent-success); }
+.rt-toast.warning { border-left-color: var(--rt-accent-warning); }
+.rt-toast.error { border-left-color: var(--rt-accent-danger); }
+
+/* ============================================================================
+   SCORE FLYOUT
+   ============================================================================ */
+
+.score-flyout {
+    position: absolute;
+    font-family: var(--rt-font-display);
+    font-size: var(--rt-text-lg);
+    font-weight: 700;
+    color: var(--rt-accent-warning);
+    text-shadow: var(--rt-glow-md);
+    pointer-events: none;
+    animation: scoreFlyout 1s var(--rt-ease-out) forwards;
+}
+
+@keyframes scoreFlyout {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-60px) scale(1.5);
+    }
+}
+
+/* ============================================================================
+   REDUCED MOTION
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .score-flyout {
+        animation: none;
+        opacity: 0;
+    }
+}
+
+/* ============================================================================
    RESPONSIVE
    ============================================================================ */
 
 @media (max-width: 768px) {
+    .rt-navbar {
+        padding: 0 0.5rem;
+    }
+    
+    .rt-lang-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 10px;
+    }
+    
     :root {
         --cell-size: 24px;
     }

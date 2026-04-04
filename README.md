@@ -3,10 +3,6 @@
 > Fully-featured browser Tetris implementing the official Tetris Guideline —
 > built with vanilla JavaScript, no dependencies.
 
-![License](https://img.shields.io/badge/license-MIT-blue)
-![JavaScript](https://img.shields.io/badge/JS-ES2022-yellow)
-![No Dependencies](https://img.shields.io/badge/dependencies-none-green)
-
 ## 🚀 Play Now
 
 Open `index.html` in your browser to play!

@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2025-04-04
+
+### Added
+
+- **Theme System**
+    - Dark/Light theme toggle with CSS custom properties
+    - Theme persistence in localStorage
+    - Navbar theme toggle button (🌙/☀️)
+    - Settings panel theme selection
+
+- **Internationalization (i18n)**
+    - Multi-language support: Polish, English, German, Japanese
+    - Language switcher in navbar (PL/EN/DE/JA)
+    - Language selection in settings
+    - All UI text translated with data-i18n attributes
+    - Pluralization support for all languages
+
+- **Enhanced UI/UX**
+    - Persistent navbar with logo and controls
+    - Toast notification system
+    - Improved pause overlay with blur effect
+    - Better button hover states with slide animation
+    - Score flyout animation
+
+- **Design Tokens**
+    - Comprehensive CSS variable system (--rt-* prefix)
+    - Typography tokens (display, mono fonts)
+    - Timing tokens for animations
+    - Spacing and border radius tokens
+
+### Changed
+
+- CSS architecture refactored with design token system
+- Pause overlay now uses backdrop blur filter
+- Settings screen reorganized with theme and language options
+- All screens now account for navbar height
+
+### Fixed
+
+- Body background now uses theme-aware variable
+- Better color contrast in light theme for accessibility
+
 ## [1.0.0] - 2025-04-04
 
 ### Added
