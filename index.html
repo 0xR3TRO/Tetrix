@@ -1,15 +1,869 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="Directories/style.css" />
-		<title>Tetris</title>
-	</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+        <meta
+            name="description"
+            content="RetroTetris - A fully-featured browser Tetris implementing the official Tetris Guideline"
+        />
+        <meta name="theme-color" content="#0a0a0f" />
+        <title>RetroTetris</title>
 
-	<body>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
-		<script src="Directories/pieces.js"></script>
-		<script src="Directories/script.js"></script>
-	</body>
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="styles/main.css" />
+        <link rel="stylesheet" href="styles/game.css" />
+        <link rel="stylesheet" href="styles/animations.css" />
+
+        <!-- Favicon (inline SVG) -->
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='10' width='80' height='20' fill='%2300f0f0'/><rect x='10' y='35' width='40' height='20' fill='%23a000f0'/><rect x='30' y='60' width='40' height='20' fill='%23f0a000'/><rect x='50' y='60' width='40' height='20' fill='%2300f000'/></svg>"
+        />
+    </head>
+
+    <body>
+        <div id="app">
+            <!-- ====================================================================
+         MAIN MENU SCREEN
+         ==================================================================== -->
+            <div id="menu-screen" class="screen active">
+                <div class="menu-logo">
+                    <h1 class="logo-glow">RETRO TETRIS</h1>
+                </div>
+                <div class="menu-items">
+                    <button class="menu-item selected" data-action="play">
+                        Play
+                    </button>
+                    <button class="menu-item" data-action="settings">
+                        Settings
+                    </button>
+                    <button class="menu-item" data-action="controls">
+                        Controls
+                    </button>
+                    <button class="menu-item" data-action="leaderboard">
+                        Leaderboard
+                    </button>
+                    <button class="menu-item" data-action="stats">Stats</button>
+                </div>
+            </div>
+
+            <!-- ====================================================================
+         MODE SELECT SCREEN
+         ==================================================================== -->
+            <div id="modeSelect-screen" class="screen">
+                <h2>Select Mode</h2>
+                <div class="mode-items">
+                    <div class="mode-item selected" data-action="marathon">
+                        <span class="mode-name">Marathon</span>
+                        <span class="mode-desc"
+                            >Classic endless mode. Score as high as you
+                            can!</span
+                        >
+                    </div>
+                    <div class="mode-item" data-action="sprint">
+                        <span class="mode-name">Sprint (40 Lines)</span>
+                        <span class="mode-desc"
+                            >Clear 40 lines as fast as possible</span
+                        >
+                    </div>
+                    <div class="mode-item" data-action="ultra">
+                        <span class="mode-name">Ultra (2 Minutes)</span>
+                        <span class="mode-desc"
+                            >Score as high as you can in 2 minutes</span
+                        >
+                    </div>
+                </div>
+                <button class="back-btn" data-action="back">
+                    ← Back to Menu
+                </button>
+            </div>
+
+            <!-- ====================================================================
+         SETTINGS SCREEN
+         ==================================================================== -->
+            <div id="settings-screen" class="screen">
+                <h2>Settings</h2>
+                <div class="settings-content">
+                    <div class="setting-row">
+                        <span class="setting-label"
+                            >DAS (Delayed Auto Shift)</span
+                        >
+                        <span class="setting-value"
+                            ><span id="das-value">167</span> ms</span
+                        >
+                    </div>
+                    <div class="setting-row">
+                        <input
+                            type="range"
+                            id="das-slider"
+                            min="0"
+                            max="300"
+                            value="167"
+                        />
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label"
+                            >ARR (Auto Repeat Rate)</span
+                        >
+                        <span class="setting-value"
+                            ><span id="arr-value">33</span> ms</span
+                        >
+                    </div>
+                    <div class="setting-row">
+                        <input
+                            type="range"
+                            id="arr-slider"
+                            min="0"
+                            max="100"
+                            value="33"
+                        />
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Ghost Piece</span>
+                        <input type="checkbox" id="ghost-toggle" checked />
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Music</span>
+                        <input type="checkbox" id="music-toggle" checked />
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Sound Effects</span>
+                        <input type="checkbox" id="sfx-toggle" checked />
+                    </div>
+                    <div class="setting-row">
+                        <span class="setting-label">Volume</span>
+                        <input
+                            type="range"
+                            id="volume-slider"
+                            min="0"
+                            max="100"
+                            value="70"
+                        />
+                    </div>
+                </div>
+                <button class="back-btn" data-action="back">
+                    ← Back to Menu
+                </button>
+            </div>
+
+            <!-- ====================================================================
+         CONTROLS SCREEN
+         ==================================================================== -->
+            <div id="controls-screen" class="screen">
+                <h2>Controls</h2>
+                <div class="controls-content">
+                    <div class="control-row">
+                        <span>Move Left</span>
+                        <span class="control-key">← / A</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Move Right</span>
+                        <span class="control-key">→ / D</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Soft Drop</span>
+                        <span class="control-key">↓</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Hard Drop</span>
+                        <span class="control-key">Space</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Rotate CW</span>
+                        <span class="control-key">↑ / X</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Rotate CCW</span>
+                        <span class="control-key">Z / Ctrl</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Hold</span>
+                        <span class="control-key">C / Shift</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Pause</span>
+                        <span class="control-key">P / Esc</span>
+                    </div>
+                    <div class="control-row">
+                        <span>Restart</span>
+                        <span class="control-key">R</span>
+                    </div>
+                </div>
+                <button class="back-btn" data-action="back">
+                    ← Back to Menu
+                </button>
+            </div>
+
+            <!-- ====================================================================
+         LEADERBOARD SCREEN
+         ==================================================================== -->
+            <div id="leaderboard-screen" class="screen">
+                <h2>Leaderboard</h2>
+                <div class="leaderboard-tabs">
+                    <button class="leaderboard-tab active" data-mode="marathon">
+                        Marathon
+                    </button>
+                    <button class="leaderboard-tab" data-mode="sprint">
+                        Sprint
+                    </button>
+                    <button class="leaderboard-tab" data-mode="ultra">
+                        Ultra
+                    </button>
+                </div>
+                <div class="leaderboard-content">
+                    <div
+                        id="marathon-scores"
+                        class="scores-container active"
+                    ></div>
+                    <div id="sprint-scores" class="scores-container"></div>
+                    <div id="ultra-scores" class="scores-container"></div>
+                </div>
+                <button class="back-btn" data-action="back">
+                    ← Back to Menu
+                </button>
+            </div>
+
+            <!-- ====================================================================
+         STATS SCREEN
+         ==================================================================== -->
+            <div id="stats-screen" class="screen">
+                <h2>Lifetime Stats</h2>
+                <div class="stats-content">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-games">0</div>
+                            <div class="stat-label">Games Played</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-lines">0</div>
+                            <div class="stat-label">Lines Cleared</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-time">00:00</div>
+                            <div class="stat-label">Time Played</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-pieces">0</div>
+                            <div class="stat-label">Pieces Placed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-max-score">
+                                000000
+                            </div>
+                            <div class="stat-label">Best Score</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-max-level">0</div>
+                            <div class="stat-label">Best Level</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-tspins">0</div>
+                            <div class="stat-label">T-Spins</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="stat-tetrises">0</div>
+                            <div class="stat-label">Tetrises</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-btn" data-action="back">
+                    ← Back to Menu
+                </button>
+            </div>
+
+            <!-- ====================================================================
+         GAME CONTAINER
+         ==================================================================== -->
+            <div id="game-container">
+                <div class="game-layout">
+                    <!-- Left Panel: Hold, Score, Level -->
+                    <div class="left-panel">
+                        <div class="panel-section">
+                            <div class="panel-label">Hold</div>
+                            <div class="hold-container">
+                                <canvas
+                                    id="hold-canvas"
+                                    width="80"
+                                    height="60"
+                                ></canvas>
+                            </div>
+                        </div>
+
+                        <div class="panel-section score-container">
+                            <div class="panel-label">Score</div>
+                            <div class="panel-value" id="score-value">
+                                000000
+                            </div>
+                            <div id="score-flyout"></div>
+                        </div>
+
+                        <div class="panel-section">
+                            <div class="panel-label">Level</div>
+                            <div class="panel-value" id="level-value">1</div>
+                            <div class="level-progress">
+                                <div
+                                    class="level-progress-fill"
+                                    id="level-progress"
+                                ></div>
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <div class="panel-label">Time</div>
+                            <div class="panel-value" id="time-value">
+                                00:00.00
+                            </div>
+                        </div>
+
+                        <div class="panel-section combo-container">
+                            <div class="panel-label">Combo</div>
+                            <div class="combo-value" id="combo-value">x0</div>
+                        </div>
+                    </div>
+
+                    <!-- Center: Game Board -->
+                    <div class="board-container">
+                        <canvas id="game-canvas"></canvas>
+                        <div id="action-text"></div>
+                    </div>
+
+                    <!-- Right Panel: Next Queue, Lines -->
+                    <div class="right-panel">
+                        <div class="panel-section">
+                            <div class="panel-label">Next</div>
+                            <div class="next-container">
+                                <canvas
+                                    id="next-canvas"
+                                    width="80"
+                                    height="350"
+                                ></canvas>
+                            </div>
+                        </div>
+
+                        <div class="panel-section">
+                            <div class="panel-label">Lines</div>
+                            <div class="panel-value" id="lines-value">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pause Overlay -->
+                <div id="pause-overlay">
+                    <h2 class="pause-title">Paused</h2>
+                    <div class="pause-menu">
+                        <button class="pause-btn" data-action="resume">
+                            Resume
+                        </button>
+                        <button class="pause-btn" data-action="restart">
+                            Restart
+                        </button>
+                        <button class="pause-btn" data-action="settings">
+                            Settings
+                        </button>
+                        <button class="pause-btn" data-action="quit">
+                            Quit to Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====================================================================
+         GAME OVER SCREEN
+         ==================================================================== -->
+            <div id="gameOver-screen" class="screen">
+                <h1 class="game-over-title">Game Over</h1>
+                <div id="high-score-notice">🎉 New High Score!</div>
+                <div class="game-over-stats">
+                    <div class="game-over-stat">
+                        <div class="game-over-stat-value" id="final-score">
+                            000000
+                        </div>
+                        <div class="game-over-stat-label">Score</div>
+                    </div>
+                    <div class="game-over-stat">
+                        <div class="game-over-stat-value" id="final-level">
+                            1
+                        </div>
+                        <div class="game-over-stat-label">Level</div>
+                    </div>
+                    <div class="game-over-stat">
+                        <div class="game-over-stat-value" id="final-lines">
+                            0
+                        </div>
+                        <div class="game-over-stat-label">Lines</div>
+                    </div>
+                    <div class="game-over-stat">
+                        <div class="game-over-stat-value" id="final-time">
+                            00:00
+                        </div>
+                        <div class="game-over-stat-label">Time</div>
+                    </div>
+                </div>
+                <div class="game-over-buttons">
+                    <button class="btn btn-primary" data-action="restart">
+                        Play Again
+                    </button>
+                    <button class="btn" data-action="quit">Menu</button>
+                </div>
+            </div>
+
+            <!-- ====================================================================
+         NAME ENTRY SCREEN
+         ==================================================================== -->
+            <div id="nameEntry-screen" class="screen">
+                <h2>Enter Your Name</h2>
+                <div class="name-entry-container">
+                    <div class="name-char active">A</div>
+                    <div class="name-char">A</div>
+                    <div class="name-char">A</div>
+                </div>
+                <p class="name-instructions">
+                    Use ↑↓ to change letter, ←→ to move, Enter to confirm
+                </p>
+            </div>
+
+            <!-- ====================================================================
+         GAME SCREEN (for UI manager)
+         ==================================================================== -->
+            <div id="game-screen" class="screen"></div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="src/engine.js"></script>
+        <script src="src/renderer.js"></script>
+        <script src="src/input.js"></script>
+        <script src="src/audio.js"></script>
+        <script src="src/storage.js"></script>
+        <script src="src/ui.js"></script>
+        <script>
+            "use strict";
+
+            /**
+             * RetroTetris - Main Application
+             * Initializes and coordinates all game systems
+             */
+            class RetroTetris {
+                #engine;
+                #renderer;
+                #input;
+                #audio;
+                #storage;
+                #ui;
+                #lastTime = 0;
+                #gravityAccumulator = 0;
+                #running = false;
+
+                constructor() {
+                    this.#storage = new StorageManager();
+                    this.#audio = new AudioEngine();
+                    this.#engine = new GameEngine();
+
+                    // Initialize canvas and renderer
+                    const canvas = document.getElementById("game-canvas");
+                    this.#renderer = new Renderer(canvas, this.#engine);
+
+                    // Initialize input
+                    this.#input = new InputManager(
+                        this.#engine,
+                        this.#storage.getSettings(),
+                    );
+
+                    // Initialize UI
+                    this.#ui = new UIManager(this);
+
+                    // Expose for UI manager
+                    this.engine = this.#engine;
+                    this.renderer = this.#renderer;
+                    this.audio = this.#audio;
+                    this.storage = this.#storage;
+
+                    // Setup event handlers
+                    this.#setupEngineEvents();
+                    this.#setupInputEvents();
+                    this.#setupUIEvents();
+
+                    // Load settings
+                    this.#applySettings();
+                }
+
+                /**
+                 * Setup engine event handlers
+                 */
+                #setupEngineEvents() {
+                    this.#engine.on("pieceSpawn", () => {
+                        // Update next queue display
+                    });
+
+                    this.#engine.on("pieceMove", () => {
+                        this.#audio.playMove();
+                    });
+
+                    this.#engine.on("pieceRotate", () => {
+                        this.#audio.playRotate();
+                    });
+
+                    this.#engine.on("pieceLock", () => {
+                        this.#audio.playLock();
+                        document
+                            .getElementById("game-canvas")
+                            ?.classList.add("lock-flash");
+                        setTimeout(() => {
+                            document
+                                .getElementById("game-canvas")
+                                ?.classList.remove("lock-flash");
+                        }, 150);
+                    });
+
+                    this.#engine.on("hardDrop", () => {
+                        this.#audio.playHardDrop();
+                    });
+
+                    this.#engine.on("hold", () => {
+                        this.#audio.playHold();
+                    });
+
+                    this.#engine.on("lineClear", (data) => {
+                        if (data.lines === 4) {
+                            this.#audio.playTetris();
+                            this.#ui.showActionText("TETRIS!", "tetris");
+                        } else if (data.isTSpin) {
+                            this.#audio.playTSpin();
+                            this.#ui.showActionText(
+                                `T-SPIN ${["", "SINGLE", "DOUBLE", "TRIPLE"][data.lines]}`,
+                                "tspin",
+                            );
+                        } else {
+                            this.#audio.playLineClear(data.lines);
+                        }
+
+                        if (data.combo > 0) {
+                            this.#ui.showActionText(
+                                `${data.combo + 1}x COMBO`,
+                                "combo",
+                            );
+                        }
+                    });
+
+                    this.#engine.on("levelUp", (data) => {
+                        this.#audio.playLevelUp();
+                        this.#ui.showActionText("LEVEL UP!", "default");
+                        document
+                            .querySelector(".board-container")
+                            ?.classList.add("level-up");
+                        setTimeout(() => {
+                            document
+                                .querySelector(".board-container")
+                                ?.classList.remove("level-up");
+                        }, 500);
+                    });
+
+                    this.#engine.on("gameOver", (data) => {
+                        this.#running = false;
+                        this.#audio.playGameOver();
+                        this.#audio.stopMusic();
+
+                        // Update stats
+                        this.#storage.updateStats({
+                            score: data.score,
+                            level: data.level,
+                            lines: data.lines,
+                            time: data.time,
+                            piecesPlaced: this.#engine.piecesPlaced,
+                            tSpins: this.#engine.tSpins,
+                        });
+
+                        // Show game over screen
+                        setTimeout(() => {
+                            this.#ui.showGameOver({
+                                ...data,
+                                mode: this.#engine.mode,
+                            });
+                        }, 500);
+                    });
+
+                    this.#engine.on("pauseToggle", (data) => {
+                        if (data.paused) {
+                            this.#ui.showPause();
+                            this.#audio.playPause();
+                        } else {
+                            this.#ui.hidePause();
+                        }
+                    });
+
+                    this.#engine.on("sprintComplete", (data) => {
+                        this.#running = false;
+                        this.#ui.showActionText("COMPLETE!", "perfect");
+                        setTimeout(() => {
+                            this.#ui.showGameOver({
+                                ...data,
+                                level: this.#engine.level,
+                                lines: this.#engine.lines,
+                                mode: "sprint",
+                            });
+                        }, 1000);
+                    });
+
+                    this.#engine.on("ultraComplete", (data) => {
+                        this.#ui.showActionText("TIME UP!", "default");
+                        setTimeout(() => {
+                            this.#ui.showGameOver({
+                                ...data,
+                                level: this.#engine.level,
+                                time: 120000,
+                                mode: "ultra",
+                            });
+                        }, 1000);
+                    });
+                }
+
+                /**
+                 * Setup input event handlers
+                 */
+                #setupInputEvents() {
+                    this.#input.on("restart", () => {
+                        if (this.#engine.gameOver) {
+                            this.start(this.#engine.mode);
+                        }
+                    });
+
+                    this.#input.on("toggleFps", () => {
+                        this.#renderer.toggleFps();
+                    });
+                }
+
+                /**
+                 * Setup UI-specific events
+                 */
+                #setupUIEvents() {
+                    // Leaderboard tab switching
+                    document
+                        .querySelectorAll(".leaderboard-tab")
+                        .forEach((tab) => {
+                            tab.addEventListener("click", () => {
+                                document
+                                    .querySelectorAll(".leaderboard-tab")
+                                    .forEach((t) =>
+                                        t.classList.remove("active"),
+                                    );
+                                document
+                                    .querySelectorAll(".scores-container")
+                                    .forEach((c) =>
+                                        c.classList.remove("active"),
+                                    );
+                                tab.classList.add("active");
+                                document
+                                    .getElementById(
+                                        `${tab.dataset.mode}-scores`,
+                                    )
+                                    ?.classList.add("active");
+                            });
+                        });
+
+                    // Settings sliders
+                    document
+                        .getElementById("das-slider")
+                        ?.addEventListener("input", (e) => {
+                            document.getElementById("das-value").textContent =
+                                e.target.value;
+                            this.#storage.updateSettings({
+                                das: parseInt(e.target.value),
+                            });
+                            this.#input.setConfig({
+                                DAS: parseInt(e.target.value),
+                            });
+                        });
+
+                    document
+                        .getElementById("arr-slider")
+                        ?.addEventListener("input", (e) => {
+                            document.getElementById("arr-value").textContent =
+                                e.target.value;
+                            this.#storage.updateSettings({
+                                arr: parseInt(e.target.value),
+                            });
+                            this.#input.setConfig({
+                                ARR: parseInt(e.target.value),
+                            });
+                        });
+
+                    document
+                        .getElementById("volume-slider")
+                        ?.addEventListener("input", (e) => {
+                            this.#audio.setMasterVolume(e.target.value / 100);
+                            this.#storage.updateSettings({
+                                volume: e.target.value / 100,
+                            });
+                        });
+
+                    document
+                        .getElementById("music-toggle")
+                        ?.addEventListener("change", (e) => {
+                            this.#audio.setMusicEnabled(e.target.checked);
+                            this.#storage.updateSettings({
+                                musicEnabled: e.target.checked,
+                            });
+                        });
+
+                    document
+                        .getElementById("sfx-toggle")
+                        ?.addEventListener("change", (e) => {
+                            this.#audio.setEnabled(e.target.checked);
+                            this.#storage.updateSettings({
+                                sfxEnabled: e.target.checked,
+                            });
+                        });
+
+                    // Initialize audio on first user interaction
+                    document.addEventListener(
+                        "click",
+                        () => {
+                            this.#audio.init();
+                            this.#audio.resume();
+                        },
+                        { once: true },
+                    );
+
+                    document.addEventListener(
+                        "keydown",
+                        () => {
+                            this.#audio.init();
+                            this.#audio.resume();
+                        },
+                        { once: true },
+                    );
+                }
+
+                /**
+                 * Apply loaded settings
+                 */
+                #applySettings() {
+                    const settings = this.#storage.getSettings();
+
+                    // Input settings
+                    this.#input.setConfig({
+                        DAS: settings.das,
+                        ARR: settings.arr,
+                        SDF: settings.sdf,
+                    });
+
+                    // Audio settings
+                    this.#audio.setMasterVolume(settings.volume);
+                    this.#audio.setMusicVolume(settings.musicVolume);
+                    this.#audio.setSfxVolume(settings.sfxVolume);
+
+                    // Update UI elements
+                    const dasSlider = document.getElementById("das-slider");
+                    const arrSlider = document.getElementById("arr-slider");
+                    const volumeSlider =
+                        document.getElementById("volume-slider");
+
+                    if (dasSlider) {
+                        dasSlider.value = settings.das;
+                        document.getElementById("das-value").textContent =
+                            settings.das;
+                    }
+                    if (arrSlider) {
+                        arrSlider.value = settings.arr;
+                        document.getElementById("arr-value").textContent =
+                            settings.arr;
+                    }
+                    if (volumeSlider) {
+                        volumeSlider.value = settings.volume * 100;
+                    }
+                }
+
+                /**
+                 * Start a new game
+                 * @param {string} mode - Game mode
+                 */
+                start(mode = "marathon") {
+                    this.#engine.reset(mode);
+                    this.#gravityAccumulator = 0;
+                    this.#lastTime = 0;
+                    this.#running = true;
+
+                    this.#ui.showScreen("game");
+                    this.#ui.hidePause();
+                    this.#input.setEnabled(true);
+
+                    // Start music
+                    this.#audio.playMusic();
+
+                    // Start game loop
+                    requestAnimationFrame((t) => this.#gameLoop(t));
+                }
+
+                /**
+                 * Main game loop
+                 * @param {number} timestamp - Current timestamp
+                 */
+                #gameLoop(timestamp) {
+                    if (!this.#running) return;
+
+                    if (this.#lastTime === 0) {
+                        this.#lastTime = timestamp;
+                    }
+
+                    const deltaTime = Math.min(timestamp - this.#lastTime, 100);
+                    this.#lastTime = timestamp;
+
+                    if (!this.#engine.paused && !this.#engine.gameOver) {
+                        // Update engine
+                        this.#engine.update(deltaTime);
+
+                        // Apply gravity
+                        const gravity = this.#engine.getGravity();
+                        const effectiveGravity = this.#input.isSoftDropHeld()
+                            ? gravity / this.#input.getSoftDropFactor()
+                            : gravity;
+
+                        this.#gravityAccumulator += deltaTime;
+                        while (this.#gravityAccumulator >= effectiveGravity) {
+                            this.#engine.applyGravity();
+                            this.#gravityAccumulator -= effectiveGravity;
+                        }
+
+                        // Poll gamepad
+                        this.#input.pollGamepad();
+                    }
+
+                    // Update HUD
+                    this.#ui.updateHUD({
+                        score: this.#engine.score,
+                        level: this.#engine.level,
+                        lines: this.#engine.lines,
+                        time: this.#engine.timeElapsed,
+                        combo: this.#engine.combo,
+                        holdPiece: this.#engine.holdPiece,
+                        canHold: this.#engine.canHold,
+                        nextPieces: this.#engine.getNextPieces(5),
+                    });
+
+                    // Update level progress
+                    const linesInLevel = this.#engine.lines % 10;
+                    const progress = (linesInLevel / 10) * 100;
+                    const progressEl =
+                        document.getElementById("level-progress");
+                    if (progressEl) {
+                        progressEl.style.width = `${progress}%`;
+                    }
+
+                    // Render
+                    this.#renderer.render();
+
+                    // Continue loop
+                    requestAnimationFrame((t) => this.#gameLoop(t));
+                }
+            }
+
+            // Initialize game when DOM is ready
+            document.addEventListener("DOMContentLoaded", () => {
+                window.game = new RetroTetris();
+            });
+        </script>
+    </body>
 </html>

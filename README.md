@@ -1,117 +1,173 @@
-## Project Description
+# 🎮 RetroTetris
 
-### Goal:
+> Fully-featured browser Tetris implementing the official Tetris Guideline —
+> built with vanilla JavaScript, no dependencies.
 
-The "Gameboy-Tetris" project aims to create a modern version of the classic Tetris game for the Gameboy console. The goal is to provide players with a nostalgic experience while introducing new features and improvements to enhance gameplay.
+![License](https://img.shields.io/badge/license-MIT-blue)
+![JavaScript](https://img.shields.io/badge/JS-ES2022-yellow)
+![No Dependencies](https://img.shields.io/badge/dependencies-none-green)
 
-### Features Description:
+## 🚀 Play Now
 
-- **Classic Tetris Gameplay:** Users can enjoy the classic Tetris game mechanics.
-- **Game Modes:** Introduction of various game modes, such as classic, time challenges, endless mode, etc.
-- **Leaderboard:** Storing the best scores of players and enabling competition.
-- **Customization Options:** Ability to choose different graphical and sound themes.
+Open `index.html` in your browser to play!
 
-## Requirements Analysis:
+**[▶ Live Demo — GitHub Pages](https://0xR3TRO.github.io/Gameboy-Tetris)**
 
-### Functional Requirements:
+## ✨ Features
 
-- **Classic Gameplay:** The game must accurately replicate the classic Tetris mechanics.
-- **Game Modes:** Enable selection of various game modes, such as classic, timed, and endless.
-- **Leaderboard:** Implement a system to store players' scores and display them on a leaderboard.
-- **Customization:** Add options to change graphical themes and sounds in the game.
+- **Official Tetris Guideline mechanics** — SRS rotation, 7-bag randomizer, wall kicks
+- **T-Spin detection** — Single, Double, Triple, Mini T-Spin scoring
+- **Ghost piece** — See where your piece will land
+- **Hold queue** — Save a piece for later
+- **Next queue** — Preview 5 upcoming pieces
+- **3 game modes:**
+    - Marathon — Classic endless, score as high as you can
+    - Sprint (40L) — Clear 40 lines as fast as possible
+    - Ultra (2min) — Max score in 2 minutes
+- **Web Audio API** — Procedural sound effects (no external files)
+- **LocalStorage** — High scores, settings, lifetime stats
+- **Responsive** — Works on desktop and mobile
+- **Configurable** — DAS/ARR settings for competitive play
 
-### Non-functional Requirements:
+## 🎮 Controls
 
-- **Performance:** The game must run smoothly on the Gameboy console without lag or stuttering.
-- **User Interface:** An intuitive and easy-to-use interface tailored to the Gameboy's capabilities.
-- **Sound and Graphics:** Use high-quality sounds and graphics that are compatible with the Gameboy.
+### Keyboard (Desktop)
 
-## Interface Design:
+| Key        | Action                    |
+| ---------- | ------------------------- |
+| ← →        | Move left/right           |
+| ↑ / X      | Rotate clockwise          |
+| Z / Ctrl   | Rotate counter-clockwise  |
+| ↓          | Soft drop                 |
+| Space      | Hard drop                 |
+| C / Shift  | Hold piece                |
+| P / Escape | Pause                     |
+| R          | Restart (after game over) |
+| F          | Toggle FPS counter        |
 
-### Sketches/Visualizations of the Interface:
+### Touch (Mobile)
 
-- _Main Screen:_ Start screen with options to choose game mode and access the leaderboard.
-- _Game Screen:_ View of the classic Tetris game field with current score, level, and upcoming blocks.
-- _Leaderboard Screen:_ List of top scores with the option to enter your name after finishing the game.
+| Gesture          | Action     |
+| ---------------- | ---------- |
+| Swipe left/right | Move       |
+| Swipe down       | Soft drop  |
+| Swipe up         | Hard drop  |
+| Tap left half    | Rotate CCW |
+| Tap right half   | Rotate CW  |
+| Long press       | Hold       |
 
-### Site Map:
+### Gamepad
 
-- _Main Screen_
-  - Game Options
-  - Leaderboard
-- _Game Screen_
-  - Game Field
-  - Current Scores
-  - Upcoming Blocks
-- _Leaderboard Screen_
-  - List of Top Scores
+Xbox/PlayStation controller support via Gamepad API.
 
-## System Architecture:
+## 🏗️ Architecture
 
-### Data Structure Description:
+```
+┌─────────────────────────────────────────────────────────────┐
+│  RetroTetris                                                │
+├─────────────────────────────────────────────────────────────┤
+│  index.html                                                 │
+│    ├── Main entry point                                     │
+│    └── Game initialization                                  │
+├─────────────────────────────────────────────────────────────┤
+│  src/                                                       │
+│    ├── engine.js      Game logic, physics, scoring          │
+│    ├── renderer.js    Canvas rendering                      │
+│    ├── input.js       Keyboard/touch/gamepad handling       │
+│    ├── audio.js       Web Audio API sound system            │
+│    ├── storage.js     LocalStorage persistence              │
+│    └── ui.js          Menus, overlays, HUD                  │
+├─────────────────────────────────────────────────────────────┤
+│  styles/                                                    │
+│    ├── main.css       Layout, typography                    │
+│    ├── game.css       Board, panels                         │
+│    └── animations.css CSS animations                        │
+└─────────────────────────────────────────────────────────────┘
+```
 
-The game stores data regarding:
+### Event-Driven Design
 
-- **Scores:** Top scores of players along with their names.
-- **Game Settings:** Player-selected graphical and sound themes.
-- **Game States:** Current game state, including level, score, and block positions.
+Components communicate through an `EventEmitter`:
 
-### Architecture Diagrams:
+```javascript
+engine.on("lineClear", (data) => {
+    audio.playLineClear(data.lines);
+    ui.showActionText("TETRIS!");
+});
+```
 
-The architecture is based on an MVC structure, where:
+## 📊 Tetris Guideline Compliance
 
-- **Model:** Manages the game logic, including Tetris mechanics, score management, and game states.
-- **View:** Presents the user interface and displays graphics and sounds.
-- **Controller:** Manages communication between the model and the view, responding to user actions.
+| Feature                       | Status |
+| ----------------------------- | ------ |
+| 10×20 board (+ 2 hidden rows) | ✅     |
+| 7-bag randomizer              | ✅     |
+| Super Rotation System (SRS)   | ✅     |
+| Wall kicks (I and JLSTZ)      | ✅     |
+| Lock delay (500ms, 15 resets) | ✅     |
+| Ghost piece                   | ✅     |
+| Hold queue                    | ✅     |
+| 5-piece preview               | ✅     |
+| T-Spin detection              | ✅     |
+| Back-to-back bonus            | ✅     |
+| Combo scoring                 | ✅     |
+| Perfect clear                 | ✅     |
+| DAS/ARR configurable          | ✅     |
 
-## Implementation:
+## 🔧 Development
 
-### Technology Description:
+### Running Locally
 
-- **Frontend:** Graphics and sound optimized for the Gameboy console.
-- **Backend:** Tetris game logic implemented in assembly language or C for Gameboy.
+No build process needed! Simply open `index.html` in a modern browser.
 
-### Code Structure:
+For development with live reload:
 
-- _Directories/Files_: Separate files for game logic, user interface, score management.
-- _Coding Style_: Emphasis on modularity, code readability, and detailed comments.
+```bash
+# Using Python
+python -m http.server 8000
 
-## Testing:
+# Using Node.js
+npx serve
+```
 
-### Test Plan:
+### Browser Support
 
-- **Unit Testing:** Verify the correctness of the game's logical functions.
-- **Integration Testing:** Ensure that all game components work together seamlessly.
-- **User Interface Testing:** Check user interaction with the game on the Gameboy console.
-- **Performance Testing:** Evaluate the game's smoothness and responsiveness on the Gameboy.
+- Chrome 100+
+- Firefox 100+
+- Safari 15+
+- Edge 100+
 
-### Testing Procedures:
+### Project Structure
 
-- Develop a set of test cases for each game function.
-- Establish procedures for reporting and fixing identified bugs.
+```
+Gameboy-Tetris/
+├── index.html          # Entry point
+├── src/
+│   ├── engine.js       # Game logic, physics, collisions
+│   ├── renderer.js     # Canvas rendering
+│   ├── input.js        # Input handling (keyboard/touch/gamepad)
+│   ├── audio.js        # Web Audio API sound system
+│   ├── storage.js      # LocalStorage persistence
+│   └── ui.js           # UI management
+├── styles/
+│   ├── main.css        # Layout, typography
+│   ├── game.css        # Board, panels
+│   └── animations.css  # CSS animations
+├── Directories/        # Legacy p5.js implementation (deprecated)
+├── LICENSE             # MIT License
+├── README.md           # This file
+└── CHANGELOG.md        # Version history
+```
 
-## Deployment and Maintenance:
+## ⚖️ Legal Notice
 
-### Deployment Plan:
+This project is an independent fan implementation of the Tetris game concept.
 
-- **Deployment Stages:** Testing, bug fixes, and release on media available for the Gameboy console.
-- **Deadlines:** Set dates for planned stages.
+"Tetris" and associated trademarks are property of The Tetris Company.
+This project is not affiliated with, endorsed by, or sponsored by The Tetris Company or any of its subsidiaries.
 
-### Maintenance Procedures:
+## 📝 License
 
-- **Technical Support:** Establish communication channels for users to report issues.
-- **Updates:** Plan potential updates and fixes based on user feedback.
+MIT © 2025 0xR3TRO
 
-## Schedule:
-
-### Project Plan:
-
-- **Implementation Stages:** Breakdown of tasks (e.g., game mechanics implementation, interface design, testing).
-- **Deadlines:** Allocate time for each stage.
-
-## Budget:
-
-### Estimated Costs:
-
-- **Game Development:** Based on the hours of work by the development team.
-- **Maintenance Costs:** Servers for score storage, potential external service fees, technical support.
+See [LICENSE](LICENSE) for full text.
