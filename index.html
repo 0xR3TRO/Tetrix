@@ -630,12 +630,14 @@
                 <!-- Pause Overlay -->
                 <div id="pause-overlay">
                     <h2 class="pause-title" data-i18n="pause.title">Paused</h2>
+                    <p class="pause-subtitle">Game is paused</p>
                     <div class="pause-menu">
                         <button
                             class="pause-btn"
                             data-action="resume"
                             data-i18n="pause.resume"
                         >
+                            <span class="pause-btn-icon">▶</span>
                             Resume
                         </button>
                         <button
@@ -643,6 +645,7 @@
                             data-action="restart"
                             data-i18n="pause.restart"
                         >
+                            <span class="pause-btn-icon">↺</span>
                             Restart
                         </button>
                         <button
@@ -650,13 +653,15 @@
                             data-action="settings"
                             data-i18n="pause.settings"
                         >
+                            <span class="pause-btn-icon">⚙</span>
                             Settings
                         </button>
                         <button
-                            class="pause-btn"
+                            class="pause-btn pause-btn-danger"
                             data-action="quit"
                             data-i18n="pause.menu"
                         >
+                            <span class="pause-btn-icon">⏏</span>
                             Quit to Menu
                         </button>
                     </div>

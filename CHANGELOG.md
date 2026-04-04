@@ -7,7 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.0.0] - 2025-04-04
+## [3.0.0] - 2026-04-04
+
+### Added
+
+- **Enhanced Game Window UI**
+    - Redesigned pause overlay with blurred backdrop and polished button layout
+    - Pause menu buttons now feature left-border accent, icon prefixes (▶ ↺ ⚙ ⏏), hover slide animation, and a dedicated danger style for "Quit to Menu"
+    - Header buttons (`.header-btn`) upgraded: rounded corners, lift-on-hover shadow, and smooth active press effect
+    - Touch control buttons (`.touch-btn`) redesigned: depth shadow, radial ripple on press, smoother press animation with `scale(0.97)` feedback
+    - Panel sections gain a subtle hover highlight for better interactivity cues
+    - Progress bar (level) increased to 5 px height with fully rounded caps
+    - Game container shadow layered with inner border ring for a premium look
+    - Board container border and shadow refined for cleaner framing
+
+- **Pause Subtitle**
+    - Added `.pause-subtitle` text element beneath the pause title to clarify game state
+
+### Changed
+
+- CSS architecture section renamed from "Classic Modern Gameplay Override" to "Advanced Gameplay UI Override – v3.0"
+- Panel label letter-spacing increased to 0.15em, font-size reduced to 0.48rem for a cleaner information hierarchy
+- Touch button minimum height increased to 50 px (main: 58 px) for better touch targets
+- Game container gradient angle changed to 160° for a more dynamic look
+- Hold and Next containers use a more subtle background for better piece visibility
+
+### Fixed
+
+- LICENSE copyright year updated to 2026
+- Dates across documentation aligned to 2026-04-04
+
+## [2.0.0] - 2026-04-04
 
 ### Added
 
@@ -49,7 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Body background now uses theme-aware variable
 - Better color contrast in light theme for accessibility
 
-## [1.0.0] - 2025-04-04
+## [1.0.0] - 2026-04-04
 
 ### Added
 
