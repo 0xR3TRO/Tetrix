@@ -24,6 +24,9 @@ Open `index.html` in your browser to play!
 - **LocalStorage** — High scores, settings, lifetime stats
 - **Responsive** — Works on desktop and mobile
 - **Configurable** — DAS/ARR settings for competitive play
+- **Multi-language** — Polish, English, German, Japanese (i18n)
+- **Dark / Light theme** — Persistent theme preference
+- **Advanced UI** — Redesigned pause menu, panel sections, and touch controls
 
 ## 🎮 Controls
 
@@ -52,6 +55,8 @@ Open `index.html` in your browser to play!
 | Tap right half   | Rotate CW  |
 | Long press       | Hold       |
 
+On-screen touch buttons are displayed automatically on small screens.
+
 ### Gamepad
 
 Xbox/PlayStation controller support via Gamepad API.
@@ -75,8 +80,8 @@ Xbox/PlayStation controller support via Gamepad API.
 │    └── ui.js          Menus, overlays, HUD                  │
 ├─────────────────────────────────────────────────────────────┤
 │  styles/                                                    │
-│    ├── main.css       Layout, typography                    │
-│    ├── game.css       Board, panels                         │
+│    ├── main.css       Layout, typography, design tokens     │
+│    ├── game.css       Board, panels, game UI                │
 │    └── animations.css CSS animations                        │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -91,6 +96,24 @@ engine.on("lineClear", (data) => {
     ui.showActionText("TETRIS!");
 });
 ```
+
+## 🎨 UI System
+
+RetroTetris uses a layered CSS design-token system (`--rt-*` prefix) that drives theming throughout:
+
+- **Dark theme (default)** — deep greens with purple accent
+- **Light theme** — warm parchment tones
+
+Key UI components:
+
+| Component          | Description                                               |
+| ------------------ | --------------------------------------------------------- |
+| Pause overlay      | Blurred backdrop, icon-prefixed buttons, danger style     |
+| Side panels        | Hold / Next / Score / Level / Combo / Time                |
+| Board container    | Framed canvas with layered shadows                        |
+| Touch controls     | 3D-depth buttons with press feedback and ripple effect    |
+| Header buttons     | Rounded, lift-on-hover, smooth active state               |
+| Toast notifications| Slide-in alerts for theme and language changes            |
 
 ## 📊 Tetris Guideline Compliance
 
@@ -146,10 +169,9 @@ Gameboy-Tetris/
 │   ├── storage.js      # LocalStorage persistence
 │   └── ui.js           # UI management
 ├── styles/
-│   ├── main.css        # Layout, typography
-│   ├── game.css        # Board, panels
+│   ├── main.css        # Layout, typography, design tokens
+│   ├── game.css        # Board, panels, game UI
 │   └── animations.css  # CSS animations
-├── Directories/        # Legacy p5.js implementation (deprecated)
 ├── LICENSE             # MIT License
 ├── README.md           # This file
 └── CHANGELOG.md        # Version history
@@ -164,6 +186,6 @@ This project is not affiliated with, endorsed by, or sponsored by The Tetris Com
 
 ## 📝 License
 
-MIT © 2025 0xR3TRO
+MIT © 2026 0xR3TRO
 
 See [LICENSE](LICENSE) for full text.
