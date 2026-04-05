@@ -7,8 +7,6 @@
 
 Open `index.html` in your browser to play!
 
-**[Live Demo — GitHub Pages](https://0xR3TRO.github.io/Gameboy-Tetris)**
-
 ## Features
 
 - **Official Tetris Guideline mechanics** — SRS rotation, 7-bag randomizer, wall kicks
@@ -109,14 +107,14 @@ Tetrix uses a layered CSS design-token system (`--rt-*` prefix) that drives them
 
 Key UI components:
 
-| Component          | Description                                               |
-| ------------------ | --------------------------------------------------------- |
-| Pause overlay      | Blurred backdrop, accent buttons, danger style             |
-| Side panels        | Hold / Next / Score / Level / Combo / Time                |
-| Board container    | Framed canvas with layered shadows                        |
-| Touch controls     | 3D-depth buttons with press feedback and ripple effect    |
-| Header buttons     | Rounded, lift-on-hover, smooth active state               |
-| Toast notifications| Slide-in alerts for theme and language changes            |
+| Component           | Description                                            |
+| ------------------- | ------------------------------------------------------ |
+| Pause overlay       | Blurred backdrop, accent buttons, danger style         |
+| Side panels         | Hold / Next / Score / Level / Combo / Time             |
+| Board container     | Framed canvas with layered shadows                     |
+| Touch controls      | 3D-depth buttons with press feedback and ripple effect |
+| Header buttons      | Rounded, lift-on-hover, smooth active state            |
+| Toast notifications | Slide-in alerts for theme and language changes         |
 
 ### Customization & vibes
 
