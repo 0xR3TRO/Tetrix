@@ -44,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `docs/04-localization/I18N_STYLE_GUIDE.md` for translation standards.
 - Reworked `docs/01-guides/ADVANCED_GUIDE.md` as an implementation pattern guide.
 - Sorted docs into dedicated folders (`01-guides`, `02-reference`, `03-architecture`, `04-localization`).
+- Moved trademark/legal notice text to `NOTICE` and kept `LICENSE` as a pure MIT template for GitHub detection.
 
 ## [3.0.0] - 2026-04-04
 

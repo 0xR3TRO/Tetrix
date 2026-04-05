@@ -194,6 +194,7 @@ Gameboy-Tetris/
 │   ├── game.css        # Board, panels, game UI
 │   └── animations.css  # CSS animations
 ├── LICENSE             # MIT License
+├── NOTICE              # Trademark/legal notice
 ├── README.md           # This file
 ├── CHANGELOG.md        # Version history
 └── docs/               # Structured technical docs
@@ -205,6 +206,7 @@ This project is an independent fan implementation of the Tetris game concept.
 
 "Tetris" and associated trademarks are property of The Tetris Company.
 This project is not affiliated with, endorsed by, or sponsored by The Tetris Company or any of its subsidiaries.
+See [NOTICE](NOTICE) for the formal trademark/legal notice.
 
 ## License
 
