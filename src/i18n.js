@@ -1,12 +1,12 @@
 /* ============================================================================
-   RetroTetris - Internationalization System (i18n)
+   Tetrix - Internationalization System (i18n)
    Multi-language support: PL, EN, DE, JA
    ============================================================================ */
 
 const TRANSLATIONS = {
     pl: {
         app: {
-            title: "RetroTetris",
+            title: "Tetrix",
             tagline: "Przeglądarkowa klasyka — nowa era",
         },
         nav: {
@@ -17,7 +17,7 @@ const TRANSLATIONS = {
         menu: {
             play: "Graj",
             modes: "Tryby gry",
-            scores: "Wysokie wyniki",
+            scores: "Tabela wyników",
             settings: "Ustawienia",
             controls: "Sterowanie",
             stats: "Statystyki",
@@ -74,6 +74,8 @@ const TRANSLATIONS = {
             lines: "Linie",
             time: "Czas",
             initials: "Wpisz inicjały",
+            initials_help:
+                "Wpisz litery (A-Z, 0-9), strzałkami zmień pozycję, Enter zatwierdza",
             play_again: "Jeszcze raz",
             menu: "Menu",
         },
@@ -104,6 +106,15 @@ const TRANSLATIONS = {
             sfx: "Efekty dźwiękowe",
             music: "Muzyka",
             reset: "Przywróć domyślne",
+            reset_stats_label: "Wyczyść statystyki gry",
+            reset_stats_btn: "Resetuj",
+            reset_stats_confirm:
+                "Czy na pewno wyczyścić wszystkie statystyki?",
+            reset_game_label:
+                "Przywróć dane gry i wyczyść tabelę wyników",
+            reset_game_btn: "Pełny reset",
+            reset_game_confirm:
+                "Przywrócić ustawienia, wyczyścić statystyki i tabelę wyników?",
             back: "Powrót",
         },
         controls: {
@@ -123,7 +134,7 @@ const TRANSLATIONS = {
             back: "Powrót",
         },
         scores: {
-            title: "Wysokie wyniki",
+            title: "Tabela wyników",
             empty: "Brak wyników — zagraj swoją pierwszą partię!",
             rank: "Miejsce",
             name: "Gracz",
@@ -138,6 +149,8 @@ const TRANSLATIONS = {
             games: "Rozegrane gry",
             lines: "Skasowane linie",
             time: "Czas gry",
+            max_score: "Najlepszy wynik",
+            max_level: "Najlepszy poziom",
             tetrises: "Tetrisy",
             tspins: "T-Spiny",
             pieces: "Położone klocki",
@@ -148,16 +161,18 @@ const TRANSLATIONS = {
             theme_light: "Jasny motyw włączony",
             lang_changed: "Język zmieniony",
             settings_saved: "Ustawienia zapisane",
+            stats_reset: "Statystyki zostały wyczyszczone",
+            game_reset: "Dane gry zostały zresetowane",
         },
     },
 
     en: {
-        app: { title: "RetroTetris", tagline: "Browser classic — new era" },
+        app: { title: "Tetrix", tagline: "Browser classic — new era" },
         nav: { settings: "Settings", controls: "Controls", scores: "Scores" },
         menu: {
             play: "Play",
             modes: "Game Modes",
-            scores: "High Scores",
+            scores: "Score Table",
             settings: "Settings",
             controls: "Controls",
             stats: "Statistics",
@@ -211,6 +226,8 @@ const TRANSLATIONS = {
             lines: "Lines",
             time: "Time",
             initials: "Enter initials",
+            initials_help:
+                "Type letters (A-Z, 0-9), use arrows to move, press Enter to confirm",
             play_again: "Play Again",
             menu: "Menu",
         },
@@ -241,6 +258,14 @@ const TRANSLATIONS = {
             sfx: "Sound effects",
             music: "Music",
             reset: "Reset to defaults",
+            reset_stats_label: "Clear lifetime statistics",
+            reset_stats_btn: "Reset",
+            reset_stats_confirm:
+                "Are you sure you want to reset all statistics?",
+            reset_game_label: "Reset all game data and clear score table",
+            reset_game_btn: "Full reset",
+            reset_game_confirm:
+                "Reset settings, statistics, and score table?",
             back: "Back",
         },
         controls: {
@@ -260,7 +285,7 @@ const TRANSLATIONS = {
             back: "Back",
         },
         scores: {
-            title: "High Scores",
+            title: "Score Table",
             empty: "No scores yet — play your first game!",
             rank: "Rank",
             name: "Player",
@@ -275,6 +300,8 @@ const TRANSLATIONS = {
             games: "Games played",
             lines: "Lines cleared",
             time: "Time played",
+            max_score: "Best score",
+            max_level: "Best level",
             tetrises: "Tetrises",
             tspins: "T-Spins",
             pieces: "Pieces placed",
@@ -285,11 +312,13 @@ const TRANSLATIONS = {
             theme_light: "Light theme enabled",
             lang_changed: "Language changed",
             settings_saved: "Settings saved",
+            stats_reset: "Statistics were reset",
+            game_reset: "Game data has been reset",
         },
     },
 
     de: {
-        app: { title: "RetroTetris", tagline: "Browser-Klassiker — neue Ära" },
+        app: { title: "Tetrix", tagline: "Browser-Klassiker — neue Ära" },
         nav: {
             settings: "Einstellungen",
             controls: "Steuerung",
@@ -298,7 +327,7 @@ const TRANSLATIONS = {
         menu: {
             play: "Spielen",
             modes: "Spielmodi",
-            scores: "Highscores",
+            scores: "Punktetabelle",
             settings: "Einstellungen",
             controls: "Steuerung",
             stats: "Statistiken",
@@ -352,6 +381,8 @@ const TRANSLATIONS = {
             lines: "Linien",
             time: "Zeit",
             initials: "Initialen eingeben",
+            initials_help:
+                "Gib Zeichen ein (A-Z, 0-9), mit Pfeilen wechseln, Enter bestätigt",
             play_again: "Nochmal",
             menu: "Menü",
         },
@@ -382,6 +413,15 @@ const TRANSLATIONS = {
             sfx: "Soundeffekte",
             music: "Musik",
             reset: "Auf Standard zurücksetzen",
+            reset_stats_label: "Spielstatistiken zurücksetzen",
+            reset_stats_btn: "Zurücksetzen",
+            reset_stats_confirm:
+                "Möchtest du wirklich alle Statistiken zurücksetzen?",
+            reset_game_label:
+                "Spieldaten zurücksetzen und Punktetabelle löschen",
+            reset_game_btn: "Vollständig zurücksetzen",
+            reset_game_confirm:
+                "Einstellungen, Statistiken und Punktetabelle zurücksetzen?",
             back: "Zurück",
         },
         controls: {
@@ -401,7 +441,7 @@ const TRANSLATIONS = {
             back: "Zurück",
         },
         scores: {
-            title: "Highscores",
+            title: "Punktetabelle",
             empty: "Noch keine Punkte — spiele dein erstes Spiel!",
             rank: "Rang",
             name: "Spieler",
@@ -416,6 +456,8 @@ const TRANSLATIONS = {
             games: "Gespielte Spiele",
             lines: "Gelöschte Linien",
             time: "Spielzeit",
+            max_score: "Bester Punktestand",
+            max_level: "Bestes Level",
             tetrises: "Tetrisse",
             tspins: "T-Spins",
             pieces: "Platzierte Teile",
@@ -426,19 +468,21 @@ const TRANSLATIONS = {
             theme_light: "Helles Design aktiviert",
             lang_changed: "Sprache geändert",
             settings_saved: "Einstellungen gespeichert",
+            stats_reset: "Statistiken wurden zurückgesetzt",
+            game_reset: "Spieldaten wurden zurückgesetzt",
         },
     },
 
     ja: {
         app: {
-            title: "レトロテトリス",
+            title: "Tetrix",
             tagline: "ブラウザクラシック — 新時代",
         },
         nav: { settings: "設定", controls: "操作", scores: "スコア" },
         menu: {
             play: "プレイ",
             modes: "ゲームモード",
-            scores: "ハイスコア",
+            scores: "スコア表",
             settings: "設定",
             controls: "操作説明",
             stats: "統計",
@@ -489,6 +533,8 @@ const TRANSLATIONS = {
             lines: "ライン",
             time: "タイム",
             initials: "イニシャルを入力",
+            initials_help:
+                "文字キー (A-Z, 0-9) で入力、矢印で移動、Enter で確定",
             play_again: "もう一度",
             menu: "メニュー",
         },
@@ -519,6 +565,14 @@ const TRANSLATIONS = {
             sfx: "効果音",
             music: "BGM",
             reset: "デフォルトに戻す",
+            reset_stats_label: "プレイ統計をリセット",
+            reset_stats_btn: "リセット",
+            reset_stats_confirm:
+                "すべての統計をリセットしてもよろしいですか？",
+            reset_game_label: "ゲームデータを初期化してスコア表をクリア",
+            reset_game_btn: "完全リセット",
+            reset_game_confirm:
+                "設定・統計・スコア表をすべてリセットしますか？",
             back: "戻る",
         },
         controls: {
@@ -538,7 +592,7 @@ const TRANSLATIONS = {
             back: "戻る",
         },
         scores: {
-            title: "ハイスコア",
+            title: "スコア表",
             empty: "まだスコアがありません — 最初のゲームをプレイ！",
             rank: "順位",
             name: "プレイヤー",
@@ -553,6 +607,8 @@ const TRANSLATIONS = {
             games: "プレイ回数",
             lines: "消去ライン",
             time: "プレイ時間",
+            max_score: "最高スコア",
+            max_level: "最高レベル",
             tetrises: "テトリス",
             tspins: "Tスピン",
             pieces: "配置ピース",
@@ -563,6 +619,8 @@ const TRANSLATIONS = {
             theme_light: "ライトテーマを有効化",
             lang_changed: "言語が変更されました",
             settings_saved: "設定を保存しました",
+            stats_reset: "統計をリセットしました",
+            game_reset: "ゲームデータをリセットしました",
         },
     },
 };

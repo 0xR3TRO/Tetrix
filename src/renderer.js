@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * RetroTetris Renderer
+ * Tetrix Renderer
  * Handles all Canvas and DOM rendering
  * @module renderer
  */

@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * RetroTetris Input System
+ * Tetrix Input System
  * Handles keyboard, touch, and gamepad input with DAS/ARR
  * @module input
  */

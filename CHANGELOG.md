@@ -1,11 +1,49 @@
 # Changelog
 
-All notable changes to RetroTetris will be documented in this file.
+All notable changes to Tetrix will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+
+- Settings now include a dedicated statistics reset action with confirmation prompt.
+- Settings now include a full game reset action that clears settings, lifetime stats, and score tables.
+- Name-entry screen now supports direct keyboard typing (`A-Z`, `0-9`) for high-score initials.
+- Added localized strings for stats reset actions and guidance text in the name-entry flow.
+- Added localized strings for full game reset actions and notifications.
+
+### Changed
+
+- Removed the fixed top navbar to keep launcher/gameplay layout cleaner.
+- Launcher mode selection improved: horizontal arrows, `Home`/`End`, and accessible `aria-selected` sync.
+- Project branding updated to `Tetrix`.
+- Launcher quick actions converted into an icon menu.
+- Selection lists now use custom dropdown controls backed by native `select` values.
+- Theme styling refreshed with per-theme background gradients across launcher and app surfaces.
+- Light theme redesigned with a distinct cool palette to avoid overlap with other themes.
+- Typography updated across menu and in-game UI for better readability and visual consistency.
+- Stats screen labels for best score and best level are now fully localized.
+- Branding and game title were unified to `Tetrix` across source files and documentation.
+- Stats, score tables, and secondary screens were visually centered for a consistent layout.
+
+### Fixed
+
+- Fixed dimmed gameplay issue caused by activating an empty `#game-screen` overlay during active play.
+- Keyboard navigation no longer hijacks arrows while focus is on form controls (e.g. dropdowns).
+- Name-entry key handling now prevents accidental browser back navigation on `Backspace`.
+
+### Documentation
+
+- Removed duplicated guide content and introduced a split docs structure.
+- Added `docs/README.md` as a docs index.
+- Added `docs/02-reference/API_REFERENCE.md` for function/event contracts.
+- Added `docs/03-architecture/CODE_STRUCTURE.md` for architecture ownership and flow.
+- Added `docs/04-localization/I18N_STYLE_GUIDE.md` for translation standards.
+- Reworked `docs/01-guides/ADVANCED_GUIDE.md` as an implementation pattern guide.
+- Sorted docs into dedicated folders (`01-guides`, `02-reference`, `03-architecture`, `04-localization`).
 
 ## [3.0.0] - 2026-04-04
 
@@ -13,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Enhanced Game Window UI**
     - Redesigned pause overlay with blurred backdrop and polished button layout
-    - Pause menu buttons now feature left-border accent, icon prefixes (▶ ↺ ⚙ ⏏), hover slide animation, and a dedicated danger style for "Quit to Menu"
+    - Pause menu buttons now feature left-border accent, action icons, hover slide animation, and a dedicated danger style for "Quit to Menu"
     - Header buttons (`.header-btn`) upgraded: rounded corners, lift-on-hover shadow, and smooth active press effect
     - Touch control buttons (`.touch-btn`) redesigned: depth shadow, radial ripple on press, smoother press animation with `scale(0.97)` feedback
     - Panel sections gain a subtle hover highlight for better interactivity cues
@@ -44,7 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Theme System**
     - Dark/Light theme toggle with CSS custom properties
     - Theme persistence in localStorage
-    - Navbar theme toggle button (🌙/☀️)
+    - Navbar theme toggle button (moon/sun)
     - Settings panel theme selection
 
 - **Internationalization (i18n)**
