@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * RetroTetris UI System
+ * Tetrix UI System
  * Handles menus, overlays, and UI components
  * @module ui
  */
@@ -28,6 +28,8 @@ class UIManager {
     constructor(game) {
         this.#game = game;
         this.#setupEventListeners();
+        this.#updateModeSelection();
+        this.#updateLauncherScoreTables();
     }
 
     /**
@@ -58,6 +60,7 @@ class UIManager {
      * @param {KeyboardEvent} event - Keyboard event
      */
     #handleKeyPress(event) {
+        if (this.#isInteractiveElement(event.target)) return;
         if (this.#currentScreen === "game") return;
 
         switch (this.#currentScreen) {
@@ -84,22 +87,48 @@ class UIManager {
     }
 
     /**
+     * Check if event target is a native interactive element.
+     * @param {EventTarget|null} target - Event target
+     * @returns {boolean} True when keyboard input should stay with the control
+     */
+    #isInteractiveElement(target) {
+        if (!(target instanceof HTMLElement)) return false;
+        if (target.isContentEditable) return true;
+        return ["INPUT", "SELECT", "TEXTAREA", "BUTTON"].includes(
+            target.tagName,
+        );
+    }
+
+    /**
      * Handle mode selection input
      * @param {KeyboardEvent} event - Keyboard event
      */
     #handleModeSelectInput(event) {
         const modes = ["marathon", "sprint", "ultra"];
+        let handled = true;
 
         switch (event.code) {
             case "ArrowUp":
+            case "ArrowLeft":
                 this.#selectedModeItem =
                     (this.#selectedModeItem - 1 + modes.length) % modes.length;
                 this.#updateModeSelection();
                 this.#game.audio?.playMenuMove();
                 break;
             case "ArrowDown":
+            case "ArrowRight":
                 this.#selectedModeItem =
                     (this.#selectedModeItem + 1) % modes.length;
+                this.#updateModeSelection();
+                this.#game.audio?.playMenuMove();
+                break;
+            case "Home":
+                this.#selectedModeItem = 0;
+                this.#updateModeSelection();
+                this.#game.audio?.playMenuMove();
+                break;
+            case "End":
+                this.#selectedModeItem = modes.length - 1;
                 this.#updateModeSelection();
                 this.#game.audio?.playMenuMove();
                 break;
@@ -111,6 +140,13 @@ class UIManager {
             case "Escape":
                 this.showScreen("modeSelect");
                 break;
+            default:
+                handled = false;
+                break;
+        }
+
+        if (handled) {
+            event.preventDefault();
         }
     }
 
@@ -135,6 +171,17 @@ class UIManager {
      * @param {KeyboardEvent} event - Keyboard event
      */
     #handleNameEntryInput(event) {
+        if (/^[a-z0-9]$/i.test(event.key)) {
+            this.#nameInput[this.#namePosition] = event.key.toUpperCase();
+            if (this.#namePosition < this.#nameInput.length - 1) {
+                this.#namePosition += 1;
+            }
+            this.#updateNameDisplay();
+            event.preventDefault();
+            return;
+        }
+
+        let handled = true;
         switch (event.code) {
             case "ArrowUp":
                 this.#nameInput[this.#namePosition] = this.#nextChar(
@@ -158,9 +205,24 @@ class UIManager {
                 this.#namePosition = Math.min(2, this.#namePosition + 1);
                 this.#updateNameDisplay();
                 break;
+            case "Backspace":
+            case "Delete":
+                this.#nameInput[this.#namePosition] = "A";
+                if (event.code === "Backspace" && this.#namePosition > 0) {
+                    this.#namePosition -= 1;
+                }
+                this.#updateNameDisplay();
+                break;
             case "Enter":
                 this.#submitName();
                 break;
+            default:
+                handled = false;
+                break;
+        }
+
+        if (handled) {
+            event.preventDefault();
         }
     }
 
@@ -223,6 +285,12 @@ class UIManager {
             case "restart":
                 this.#restartGame();
                 break;
+            case "resetStats":
+                this.#resetStats();
+                break;
+            case "resetGameData":
+                this.#resetGameData();
+                break;
             case "quit":
                 this.showScreen("modeSelect");
                 break;
@@ -244,19 +312,28 @@ class UIManager {
             screen.classList.remove("active");
         });
 
-        // Show target screen
-        const screen = document.getElementById(`${screenName}-screen`);
-        if (screen) {
-            screen.classList.add("active");
+        const isGameScreen = screenName === "game";
+
+        // Show target screen (except game, which uses #game-container directly)
+        if (!isGameScreen) {
+            const screen = document.getElementById(`${screenName}-screen`);
+            if (screen) {
+                screen.classList.add("active");
+            }
         }
 
-        // Special handling for game screen
-        if (screenName === "game") {
+        // Special handling for game container
+        if (isGameScreen) {
             document.getElementById("game-container")?.classList.add("active");
         } else {
             document
                 .getElementById("game-container")
                 ?.classList.remove("active");
+            this.hidePause();
+        }
+
+        if (screenName === "modeSelect") {
+            this.#updateLauncherScoreTables();
         }
     }
 
@@ -343,6 +420,55 @@ class UIManager {
     }
 
     /**
+     * Reset lifetime statistics from settings.
+     */
+    #resetStats() {
+        const confirmMessage =
+            typeof I18n !== "undefined"
+                ? I18n.t("settings.reset_stats_confirm")
+                : "Reset all statistics?";
+
+        if (!window.confirm(confirmMessage)) return;
+
+        this.#game.storage?.resetStats();
+        this.#updateStats();
+
+        if (typeof showToast === "function") {
+            const message =
+                typeof I18n !== "undefined"
+                    ? I18n.t("toast.stats_reset")
+                    : "Statistics reset";
+            showToast(message, "success");
+        }
+    }
+
+    /**
+     * Reset full game data: settings, lifetime stats, and score tables.
+     */
+    #resetGameData() {
+        const confirmMessage =
+            typeof I18n !== "undefined"
+                ? I18n.t("settings.reset_game_confirm")
+                : "Reset settings, statistics, and score table?";
+
+        if (!window.confirm(confirmMessage)) return;
+
+        this.#game.storage?.resetSettings();
+        this.#game.storage?.resetStats();
+        this.#game.storage?.clearHighScores();
+
+        if (typeof showToast === "function") {
+            const message =
+                typeof I18n !== "undefined"
+                    ? I18n.t("toast.game_reset")
+                    : "Game data has been reset";
+            showToast(message, "success");
+        }
+
+        window.setTimeout(() => window.location.reload(), 250);
+    }
+
+    /**
      * Show pause overlay
      */
     showPause() {
@@ -361,7 +487,10 @@ class UIManager {
      */
     #updateModeSelection() {
         document.querySelectorAll(".mode-item").forEach((item, i) => {
-            item.classList.toggle("selected", i === this.#selectedModeItem);
+            const isSelected = i === this.#selectedModeItem;
+            item.classList.toggle("selected", isSelected);
+            item.setAttribute("aria-selected", String(isSelected));
+            item.tabIndex = isSelected ? 0 : -1;
         });
     }
 
@@ -370,6 +499,10 @@ class UIManager {
      */
     #updateLeaderboard() {
         const modes = ["marathon", "sprint", "ultra"];
+        const emptyLabel =
+            typeof I18n !== "undefined"
+                ? I18n.t("scores.empty")
+                : "No results yet";
 
         modes.forEach((mode) => {
             const container = document.getElementById(`${mode}-scores`);
@@ -379,8 +512,7 @@ class UIManager {
             container.innerHTML = "";
 
             if (scores.length === 0) {
-                container.innerHTML =
-                    '<div class="no-scores">No scores yet</div>';
+                container.innerHTML = `<div class="no-scores">${emptyLabel}</div>`;
                 return;
             }
 
@@ -391,6 +523,48 @@ class UIManager {
           <span class="rank">${i + 1}.</span>
           <span class="name">${entry.name}</span>
           <span class="score">${
+              mode === "sprint"
+                  ? StorageManager.formatTime(entry.time)
+                  : StorageManager.formatScore(entry.score)
+          }</span>
+        `;
+                container.appendChild(row);
+            });
+        });
+    }
+
+    /**
+     * Update compact score tables shown on launcher below mode cards.
+     */
+    #updateLauncherScoreTables() {
+        const modes = ["marathon", "sprint", "ultra"];
+        const emptyLabel =
+            typeof I18n !== "undefined"
+                ? I18n.t("scores.empty")
+                : "No results yet";
+
+        modes.forEach((mode) => {
+            const container = document.getElementById(`quick-${mode}-scores`);
+            if (!container) return;
+
+            const scores = (this.#game.storage?.getHighScores(mode) || []).slice(
+                0,
+                5,
+            );
+            container.innerHTML = "";
+
+            if (scores.length === 0) {
+                container.innerHTML = `<div class="quick-score-empty">${emptyLabel}</div>`;
+                return;
+            }
+
+            scores.forEach((entry, index) => {
+                const row = document.createElement("div");
+                row.className = "quick-score-row";
+                row.innerHTML = `
+          <span class="quick-score-rank">${index + 1}.</span>
+          <span class="quick-score-name">${entry.name}</span>
+          <span class="quick-score-value">${
               mode === "sprint"
                   ? StorageManager.formatTime(entry.time)
                   : StorageManager.formatScore(entry.score)
@@ -453,6 +627,14 @@ class UIManager {
 
         // Update next queue
         this.#updateNextPreview(state.nextPieces);
+    }
+
+    /**
+     * Refresh UI parts that include dynamic text generated in JavaScript.
+     */
+    refreshLocalizedContent() {
+        this.#updateLeaderboard();
+        this.#updateLauncherScoreTables();
     }
 
     /**

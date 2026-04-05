@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
             name="description"
-            content="RetroTetris - A fully-featured browser Tetris implementing the official Tetris Guideline"
+            content="Tetrix - A fully-featured browser Tetris implementing the official Tetris Guideline"
         />
         <meta name="theme-color" content="#0a0a0f" />
-        <title>RetroTetris</title>
+        <title>Tetrix</title>
 
         <!-- Stylesheets -->
         <link rel="stylesheet" href="styles/main.css" />
@@ -23,30 +23,6 @@
     </head>
 
     <body>
-        <!-- ====================================================================
-         NAVBAR
-         ==================================================================== -->
-        <nav class="rt-navbar">
-            <div class="rt-navbar-logo">TETRIS CLASSIC</div>
-            <div class="rt-navbar-controls">
-                <div class="rt-lang-switcher">
-                    <button class="rt-lang-btn" data-lang="pl">PL</button>
-                    <button class="rt-lang-btn active" data-lang="en">
-                        EN
-                    </button>
-                    <button class="rt-lang-btn" data-lang="de">DE</button>
-                    <button class="rt-lang-btn" data-lang="ja">JA</button>
-                </div>
-                <button
-                    class="rt-theme-btn"
-                    id="theme-toggle"
-                    title="Switch theme"
-                >
-                    🌙
-                </button>
-            </div>
-        </nav>
-
         <!-- TOAST CONTAINER -->
         <div class="rt-toast-container" id="toast-container"></div>
 
@@ -60,7 +36,9 @@
                         <p class="launcher-eyebrow" data-i18n="launcher.eyebrow">
                             Ready to drop?
                         </p>
-                        <h1 class="launcher-title">RetroTetris Control Room</h1>
+                        <h1 class="launcher-title" data-i18n="launcher.title">
+                            Tetrix
+                        </h1>
                         <p
                             class="launcher-subtitle"
                             data-i18n="launcher.subtitle"
@@ -70,32 +48,53 @@
                         </p>
                         <div class="launcher-actions">
                             <button
-                                class="chip-btn"
+                                class="chip-btn chip-btn-icon"
                                 data-action="settings"
-                                data-i18n="settings.title"
                             >
-                                Settings
+                                <span class="chip-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false">
+                                        <circle cx="12" cy="12" r="3.25"></circle>
+                                        <path
+                                            d="M12 2.5V5M12 19V21.5M4.7 4.7l1.8 1.8M17.5 17.5l1.8 1.8M2.5 12H5M19 12h2.5M4.7 19.3l1.8-1.8M17.5 6.5l1.8-1.8"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span data-i18n="settings.title">Settings</span>
                             </button>
                             <button
-                                class="chip-btn"
+                                class="chip-btn chip-btn-icon"
                                 data-action="controls"
-                                data-i18n="controls.title"
                             >
-                                Controls
+                                <span class="chip-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false">
+                                        <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+                                        <path d="M7 11h10M7 14h6M15 14h2"></path>
+                                    </svg>
+                                </span>
+                                <span data-i18n="controls.title">Controls</span>
                             </button>
                             <button
-                                class="chip-btn"
+                                class="chip-btn chip-btn-icon"
                                 data-action="leaderboard"
-                                data-i18n="scores.title"
                             >
-                                High Scores
+                                <span class="chip-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false">
+                                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                                        <path d="M3 10h18M3 14h18M9 5v14M15 5v14"></path>
+                                    </svg>
+                                </span>
+                                <span data-i18n="scores.title">Score Table</span>
                             </button>
                             <button
-                                class="chip-btn"
+                                class="chip-btn chip-btn-icon"
                                 data-action="stats"
-                                data-i18n="stats.title"
                             >
-                                Stats
+                                <span class="chip-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" focusable="false">
+                                        <path d="M4 20h16M6 20V12M12 20V8M18 20V5"></path>
+                                    </svg>
+                                </span>
+                                <span data-i18n="stats.title">Stats</span>
                             </button>
                         </div>
                     </div>
@@ -166,7 +165,6 @@
                                 <input
                                     type="checkbox"
                                     id="music-toggle-quick"
-                                    checked
                                     title="Music"
                                     aria-label="Music toggle"
                                 />
@@ -174,12 +172,34 @@
                                     Music on
                                 </span>
                             </label>
+                            <label
+                                class="setting-label"
+                                for="lang-select-quick"
+                                data-i18n="settings.language"
+                            >
+                                Language
+                            </label>
+                            <select
+                                id="lang-select-quick"
+                                class="setting-select compact"
+                                title="Language selection"
+                                aria-label="Language selection"
+                            >
+                                <option value="pl">Polski</option>
+                                <option value="en" selected>English</option>
+                                <option value="de">Deutsch</option>
+                                <option value="ja">日本語</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="mode-grid">
-                    <div class="mode-item mode-card selected" data-action="marathon" tabindex="0">
+                <div
+                    class="mode-grid"
+                    role="listbox"
+                    aria-label="Game mode selection"
+                >
+                    <div class="mode-item mode-card selected" data-action="marathon" tabindex="0" role="option" aria-selected="true">
                         <div class="mode-meta">
                             <span class="mode-pill" data-i18n="modes.marathon.name"
                                 >Marathon</span
@@ -198,7 +218,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="mode-item mode-card" data-action="sprint" tabindex="0">
+                    <div class="mode-item mode-card" data-action="sprint" tabindex="-1" role="option" aria-selected="false">
                         <div class="mode-meta">
                             <span class="mode-pill" data-i18n="modes.sprint.name"
                                 >Sprint (40 Lines)</span
@@ -216,7 +236,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="mode-item mode-card" data-action="ultra" tabindex="0">
+                    <div class="mode-item mode-card" data-action="ultra" tabindex="-1" role="option" aria-selected="false">
                         <div class="mode-meta">
                             <span class="mode-pill" data-i18n="modes.ultra.name"
                                 >Ultra (2 Minutes)</span
@@ -235,6 +255,38 @@
                         </div>
                     </div>
                 </div>
+
+                <section class="launcher-scoreboard" aria-label="Mode score table">
+                    <h2
+                        class="launcher-scoreboard-title"
+                        data-i18n="scores.title"
+                    >
+                        Score Table
+                    </h2>
+                    <div class="launcher-scoreboard-grid">
+                        <article class="launcher-score-card">
+                            <h3 data-i18n="modes.marathon.name">Marathon</h3>
+                            <div
+                                id="quick-marathon-scores"
+                                class="quick-scores-list"
+                            ></div>
+                        </article>
+                        <article class="launcher-score-card">
+                            <h3 data-i18n="modes.sprint.name">Sprint</h3>
+                            <div
+                                id="quick-sprint-scores"
+                                class="quick-scores-list"
+                            ></div>
+                        </article>
+                        <article class="launcher-score-card">
+                            <h3 data-i18n="modes.ultra.name">Ultra</h3>
+                            <div
+                                id="quick-ultra-scores"
+                                class="quick-scores-list"
+                            ></div>
+                        </article>
+                    </div>
+                </section>
             </div>
 
             <!-- ====================================================================
@@ -353,7 +405,6 @@
                         <input
                             type="checkbox"
                             id="music-toggle"
-                            checked
                             title="Music"
                             aria-label="Music"
                         />
@@ -404,6 +455,40 @@
                             title="Volume slider"
                             aria-label="Volume slider"
                         />
+                    </div>
+                    <div class="setting-row setting-row-action">
+                        <span
+                            class="setting-label"
+                            data-i18n="settings.reset_stats_label"
+                        >
+                            Reset statistics
+                        </span>
+                        <button
+                            type="button"
+                            id="reset-stats-btn"
+                            class="btn btn-danger btn-compact"
+                            data-action="resetStats"
+                            data-i18n="settings.reset_stats_btn"
+                        >
+                            Reset
+                        </button>
+                    </div>
+                    <div class="setting-row setting-row-action">
+                        <span
+                            class="setting-label"
+                            data-i18n="settings.reset_game_label"
+                        >
+                            Reset game data
+                        </span>
+                        <button
+                            type="button"
+                            id="reset-game-btn"
+                            class="btn btn-danger btn-compact"
+                            data-action="resetGameData"
+                            data-i18n="settings.reset_game_btn"
+                        >
+                            Full reset
+                        </button>
                     </div>
                 </div>
                 <button
@@ -484,7 +569,7 @@
          LEADERBOARD SCREEN
          ==================================================================== -->
             <div id="leaderboard-screen" class="screen">
-                <h2 data-i18n="scores.title">High Scores</h2>
+                <h2 data-i18n="scores.title">Score Table</h2>
                 <div class="leaderboard-tabs">
                     <button
                         class="leaderboard-tab active"
@@ -560,11 +645,21 @@
                             <div class="stat-value" id="stat-max-score">
                                 000000
                             </div>
-                            <div class="stat-label">Best Score</div>
+                            <div
+                                class="stat-label"
+                                data-i18n="stats.max_score"
+                            >
+                                Best Score
+                            </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-max-level">0</div>
-                            <div class="stat-label">Best Level</div>
+                            <div
+                                class="stat-label"
+                                data-i18n="stats.max_level"
+                            >
+                                Best Level
+                            </div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-tspins">0</div>
@@ -767,7 +862,6 @@
                             data-action="resume"
                             data-i18n="pause.resume"
                         >
-                            <span class="pause-btn-icon">▶</span>
                             Resume
                         </button>
                         <button
@@ -775,7 +869,6 @@
                             data-action="restart"
                             data-i18n="pause.restart"
                         >
-                            <span class="pause-btn-icon">↺</span>
                             Restart
                         </button>
                         <button
@@ -783,7 +876,6 @@
                             data-action="settings"
                             data-i18n="pause.settings"
                         >
-                            <span class="pause-btn-icon">⚙</span>
                             Settings
                         </button>
                         <button
@@ -791,7 +883,6 @@
                             data-action="quit"
                             data-i18n="pause.menu"
                         >
-                            <span class="pause-btn-icon">⏏</span>
                             Quit to Menu
                         </button>
                     </div>
@@ -882,15 +973,11 @@
                     <div class="name-char">A</div>
                     <div class="name-char">A</div>
                 </div>
-                <p class="name-instructions">
-                    Use ↑↓ to change letter, ←→ to move, Enter to confirm
+                <p class="name-instructions" data-i18n="gameover.initials_help">
+                    Use letter keys (A-Z, 0-9), arrows to move, Enter to confirm
                 </p>
             </div>
 
-            <!-- ====================================================================
-         GAME SCREEN (for UI manager)
-         ==================================================================== -->
-            <div id="game-screen" class="screen"></div>
         </div>
 
         <!-- Scripts -->
@@ -900,16 +987,18 @@
         <script src="src/audio.js"></script>
         <script src="src/storage.js"></script>
         <script src="src/ui.js"></script>
+        <script src="src/custom-select.js"></script>
 
         <!-- i18n Module (inline for single-file compatibility) -->
         <script>
             const TRANSLATIONS = {
                 pl: {
                     app: {
-                        title: "RetroTetris",
+                        title: "Tetrix",
                         tagline: "Przeglądarkowa klasyka — nowa era",
                     },
                     launcher: {
+                        title: "Tetrix",
                         eyebrow: "Gotowy na drop?",
                         subtitle:
                             "Wybierz tryb, motyw i muzykę, aby od razu wskoczyć do gry.",
@@ -923,7 +1012,7 @@
                     menu: {
                         play: "Graj",
                         modes: "Tryby gry",
-                        scores: "Wysokie wyniki",
+                        scores: "Tabela wyników",
                         settings: "Ustawienia",
                         controls: "Sterowanie",
                         stats: "Statystyki",
@@ -960,12 +1049,14 @@
                     },
                     gameover: {
                         title: "GAME OVER",
-                        new_record: "🎉 NOWY REKORD!",
+                        new_record: "NOWY REKORD!",
                         score: "Wynik",
                         level: "Poziom",
                         lines: "Linie",
                         time: "Czas",
                         initials: "Wpisz inicjały",
+                        initials_help:
+                            "Wpisz litery (A-Z, 0-9), strzałkami zmień pozycję, Enter zatwierdza",
                         play_again: "Jeszcze raz",
                         menu: "Menu",
                     },
@@ -987,6 +1078,15 @@
                         sfx: "Efekty dźwiękowe",
                         das: "DAS",
                         arr: "ARR",
+                        reset_stats_label: "Wyczyść statystyki gry",
+                        reset_stats_btn: "Resetuj",
+                        reset_stats_confirm:
+                            "Czy na pewno wyczyścić wszystkie statystyki?",
+                        reset_game_label:
+                            "Przywróć dane gry i wyczyść tabelę wyników",
+                        reset_game_btn: "Pełny reset",
+                        reset_game_confirm:
+                            "Przywrócić ustawienia, wyczyścić statystyki i tabelę wyników?",
                         back: "← Powrót",
                     },
                     controls: {
@@ -1002,12 +1102,18 @@
                         restart: "Restart",
                         back: "← Powrót",
                     },
-                    scores: { title: "Wysokie wyniki", back: "← Powrót" },
+                    scores: {
+                        title: "Tabela wyników",
+                        empty: "Brak wyników",
+                        back: "← Powrót",
+                    },
                     stats: {
                         title: "Statystyki",
                         games: "Rozegrane gry",
                         lines: "Skasowane linie",
                         time: "Czas gry",
+                        max_score: "Najlepszy wynik",
+                        max_level: "Najlepszy poziom",
                         tetrises: "Tetrisy",
                         tspins: "T-Spiny",
                         pieces: "Położone klocki",
@@ -1019,14 +1125,17 @@
                         theme_neon: "Neonowy motyw",
                         theme_sunset: "Motyw zachodu",
                         lang_changed: "Język zmieniony",
+                        stats_reset: "Statystyki zostały wyczyszczone",
+                        game_reset: "Dane gry zostały zresetowane",
                     },
                 },
                 en: {
                     app: {
-                        title: "RetroTetris",
+                        title: "Tetrix",
                         tagline: "Browser classic — new era",
                     },
                     launcher: {
+                        title: "Tetrix",
                         eyebrow: "Ready to drop?",
                         subtitle:
                             "Pick a mode, theme, and music vibe for an instant start.",
@@ -1040,7 +1149,7 @@
                     menu: {
                         play: "Play",
                         modes: "Game Modes",
-                        scores: "High Scores",
+                        scores: "Score Table",
                         settings: "Settings",
                         controls: "Controls",
                         stats: "Statistics",
@@ -1077,12 +1186,14 @@
                     },
                     gameover: {
                         title: "GAME OVER",
-                        new_record: "🎉 NEW RECORD!",
+                        new_record: "NEW RECORD!",
                         score: "Score",
                         level: "Level",
                         lines: "Lines",
                         time: "Time",
                         initials: "Enter initials",
+                        initials_help:
+                            "Type letters (A-Z, 0-9), use arrows to move, press Enter to confirm",
                         play_again: "Play Again",
                         menu: "Menu",
                     },
@@ -1104,6 +1215,15 @@
                         sfx: "Sound Effects",
                         das: "DAS",
                         arr: "ARR",
+                        reset_stats_label: "Clear lifetime statistics",
+                        reset_stats_btn: "Reset",
+                        reset_stats_confirm:
+                            "Are you sure you want to reset all statistics?",
+                        reset_game_label:
+                            "Reset all game data and clear score table",
+                        reset_game_btn: "Full reset",
+                        reset_game_confirm:
+                            "Reset settings, statistics, and score table?",
                         back: "← Back",
                     },
                     controls: {
@@ -1119,12 +1239,18 @@
                         restart: "Restart",
                         back: "← Back",
                     },
-                    scores: { title: "High Scores", back: "← Back" },
+                    scores: {
+                        title: "Score Table",
+                        empty: "No results yet",
+                        back: "← Back",
+                    },
                     stats: {
                         title: "Statistics",
                         games: "Games played",
                         lines: "Lines cleared",
                         time: "Time played",
+                        max_score: "Best score",
+                        max_level: "Best level",
                         tetrises: "Tetrises",
                         tspins: "T-Spins",
                         pieces: "Pieces placed",
@@ -1136,14 +1262,17 @@
                         theme_neon: "Neon theme",
                         theme_sunset: "Sunset theme",
                         lang_changed: "Language changed",
+                        stats_reset: "Statistics were reset",
+                        game_reset: "Game data has been reset",
                     },
                 },
                 de: {
                     app: {
-                        title: "RetroTetris",
+                        title: "Tetrix",
                         tagline: "Browser-Klassiker — neue Ära",
                     },
                     launcher: {
+                        title: "Tetrix",
                         eyebrow: "Bereit für den Drop?",
                         subtitle:
                             "Wähle Modus, Design und Musik für einen sofortigen Start.",
@@ -1157,7 +1286,7 @@
                     menu: {
                         play: "Spielen",
                         modes: "Spielmodi",
-                        scores: "Highscores",
+                        scores: "Punktetabelle",
                         settings: "Einstellungen",
                         controls: "Steuerung",
                         stats: "Statistiken",
@@ -1194,12 +1323,14 @@
                     },
                     gameover: {
                         title: "SPIEL VORBEI",
-                        new_record: "🎉 NEUER REKORD!",
+                        new_record: "NEUER REKORD!",
                         score: "Punkte",
                         level: "Level",
                         lines: "Linien",
                         time: "Zeit",
                         initials: "Initialen eingeben",
+                        initials_help:
+                            "Gib Zeichen ein (A-Z, 0-9), mit Pfeilen wechseln, Enter bestätigt",
                         play_again: "Nochmal",
                         menu: "Menü",
                     },
@@ -1221,6 +1352,15 @@
                         sfx: "Soundeffekte",
                         das: "DAS",
                         arr: "ARR",
+                        reset_stats_label: "Spielstatistiken zurücksetzen",
+                        reset_stats_btn: "Zurücksetzen",
+                        reset_stats_confirm:
+                            "Möchtest du wirklich alle Statistiken zurücksetzen?",
+                        reset_game_label:
+                            "Spieldaten zurücksetzen und Punktetabelle löschen",
+                        reset_game_btn: "Vollständig zurücksetzen",
+                        reset_game_confirm:
+                            "Einstellungen, Statistiken und Punktetabelle zurücksetzen?",
                         back: "← Zurück",
                     },
                     controls: {
@@ -1236,12 +1376,18 @@
                         restart: "Neustart",
                         back: "← Zurück",
                     },
-                    scores: { title: "Highscores", back: "← Zurück" },
+                    scores: {
+                        title: "Punktetabelle",
+                        empty: "Noch keine Ergebnisse",
+                        back: "← Zurück",
+                    },
                     stats: {
                         title: "Statistiken",
                         games: "Gespielte Spiele",
                         lines: "Gelöschte Linien",
                         time: "Spielzeit",
+                        max_score: "Bester Punktestand",
+                        max_level: "Bestes Level",
                         tetrises: "Tetrisse",
                         tspins: "T-Spins",
                         pieces: "Platzierte Teile",
@@ -1253,14 +1399,17 @@
                         theme_neon: "Neon-Design",
                         theme_sunset: "Sonnenuntergang-Design",
                         lang_changed: "Sprache geändert",
+                        stats_reset: "Statistiken wurden zurückgesetzt",
+                        game_reset: "Spieldaten wurden zurückgesetzt",
                     },
                 },
                 ja: {
                     app: {
-                        title: "レトロテトリス",
+                        title: "Tetrix",
                         tagline: "ブラウザクラシック — 新時代",
                     },
                     launcher: {
+                        title: "Tetrix",
                         eyebrow: "ドロップの準備はOK？",
                         subtitle:
                             "モード・テーマ・音楽を選んで、すぐにゲームへ。",
@@ -1274,7 +1423,7 @@
                     menu: {
                         play: "プレイ",
                         modes: "ゲームモード",
-                        scores: "ハイスコア",
+                        scores: "スコア表",
                         settings: "設定",
                         controls: "操作説明",
                         stats: "統計",
@@ -1311,12 +1460,14 @@
                     },
                     gameover: {
                         title: "ゲームオーバー",
-                        new_record: "🎉 新記録！",
+                        new_record: "新記録！",
                         score: "スコア",
                         level: "レベル",
                         lines: "ライン",
                         time: "タイム",
                         initials: "イニシャルを入力",
+                        initials_help:
+                            "文字キー (A-Z, 0-9) で入力、矢印で移動、Enter で確定",
                         play_again: "もう一度",
                         menu: "メニュー",
                     },
@@ -1338,6 +1489,15 @@
                         sfx: "効果音",
                         das: "DAS",
                         arr: "ARR",
+                        reset_stats_label: "プレイ統計をリセット",
+                        reset_stats_btn: "リセット",
+                        reset_stats_confirm:
+                            "すべての統計をリセットしてもよろしいですか？",
+                        reset_game_label:
+                            "ゲームデータを初期化してスコア表をクリア",
+                        reset_game_btn: "完全リセット",
+                        reset_game_confirm:
+                            "設定・統計・スコア表をすべてリセットしますか？",
                         back: "← 戻る",
                     },
                     controls: {
@@ -1353,12 +1513,18 @@
                         restart: "リスタート",
                         back: "← 戻る",
                     },
-                    scores: { title: "ハイスコア", back: "← 戻る" },
+                    scores: {
+                        title: "スコア表",
+                        empty: "まだ結果はありません",
+                        back: "← 戻る",
+                    },
                     stats: {
                         title: "統計",
                         games: "プレイ回数",
                         lines: "消去ライン",
                         time: "プレイ時間",
+                        max_score: "最高スコア",
+                        max_level: "最高レベル",
                         tetrises: "テトリス",
                         tspins: "Tスピン",
                         pieces: "配置ピース",
@@ -1370,6 +1536,8 @@
                         theme_neon: "ネオンテーマ",
                         theme_sunset: "サンセットテーマ",
                         lang_changed: "言語が変更されました",
+                        stats_reset: "統計をリセットしました",
+                        game_reset: "ゲームデータをリセットしました",
                     },
                 },
             };
@@ -1412,6 +1580,8 @@
                         else el.textContent = val;
                     });
                     document.documentElement.setAttribute("lang", this.#locale);
+                    document.title = this.t("app.title");
+                    document.dispatchEvent(new CustomEvent("i18n:updated"));
                 }
             }
 
@@ -1419,15 +1589,9 @@
             class ThemeManager {
                 static #current = "dark";
                 static #themes = ["dark", "light", "neon", "sunset"];
-                static #labels = {
-                    dark: "🌙 Dark",
-                    light: "☀️ Light",
-                    neon: "⚡ Neon",
-                    sunset: "🌅 Sunset",
-                };
 
                 static init() {
-                    const saved = localStorage.getItem("rt_theme") || "dark";
+                    const saved = localStorage.getItem("tetrix_theme") || "dark";
                     this.set(saved);
                 }
 
@@ -1459,14 +1623,7 @@
                                 .trim(),
                         );
                     }
-                    localStorage.setItem("rt_theme", targetTheme);
-
-                    // Update UI
-                    const toggleBtn = document.getElementById("theme-toggle");
-                    if (toggleBtn) {
-                        toggleBtn.textContent =
-                            this.#labels[targetTheme] || "Theme";
-                    }
+                    localStorage.setItem("tetrix_theme", targetTheme);
 
                     document
                         .querySelectorAll("[data-theme-choice]")
@@ -1478,12 +1635,6 @@
                         });
                 }
 
-                static toggle() {
-                    const currentIndex = this.#themes.indexOf(this.#current);
-                    const nextTheme =
-                        this.#themes[(currentIndex + 1) % this.#themes.length];
-                    this.set(nextTheme);
-                }
             }
 
             // Toast notifications
@@ -1506,16 +1657,17 @@
             "use strict";
 
             /**
-             * RetroTetris - Main Application
+             * Tetrix - Main Application
              * Initializes and coordinates all game systems
              */
-            class RetroTetris {
+            class Tetrix {
                 #engine;
                 #renderer;
                 #input;
                 #audio;
                 #storage;
                 #ui;
+                #customSelects;
                 #lastTime = 0;
                 #gravityAccumulator = 0;
                 #running = false;
@@ -1523,7 +1675,7 @@
                 constructor() {
                     // Initialize theme and i18n first
                     ThemeManager.init();
-                    const savedLang = localStorage.getItem("rt_lang") || "en";
+                    const savedLang = localStorage.getItem("tetrix_lang") || "en";
                     I18n.load(savedLang);
                     this.#updateLangButtons(savedLang);
 
@@ -1554,9 +1706,24 @@
                     this.#setupEngineEvents();
                     this.#setupInputEvents();
                     this.#setupUIEvents();
+                    this.#setupCustomSelects();
 
                     // Load settings
                     this.#applySettings();
+                }
+
+                /**
+                 * Setup custom select controls used across launcher and settings.
+                 */
+                #setupCustomSelects() {
+                    this.#customSelects = new CustomSelectManager([
+                        "lang-select",
+                        "lang-select-quick",
+                        "music-style-select",
+                        "music-style-quick",
+                    ]);
+                    this.#customSelects.init();
+                    this.#customSelects.syncAll();
                 }
 
                 /**
@@ -1801,21 +1968,6 @@
                             this.#setMusicStyle(e.target.value);
                         });
 
-                    // Theme toggle in navbar
-                    document
-                        .getElementById("theme-toggle")
-                        ?.addEventListener("click", () => {
-                            ThemeManager.toggle();
-                            this.#storage.updateSettings({
-                                theme: ThemeManager.current,
-                            });
-                            const msg =
-                                I18n.t(
-                                    `toast.theme_${ThemeManager.current}`,
-                                ) || I18n.t("toast.theme_dark");
-                            showToast(msg);
-                        });
-
                     // Theme toggle buttons in settings
                     document
                         .querySelectorAll("[data-theme-choice]")
@@ -1833,26 +1985,17 @@
                             });
                         });
 
-                    // Language switcher in navbar
-                    document.querySelectorAll(".rt-lang-btn").forEach((btn) => {
-                        btn.addEventListener("click", () => {
-                            const lang = btn.dataset.lang;
-                            I18n.load(lang);
-                            localStorage.setItem("rt_lang", lang);
-                            this.#updateLangButtons(lang);
-                            showToast(I18n.t("toast.lang_changed"));
-                        });
-                    });
-
                     // Language select in settings
                     document
                         .getElementById("lang-select")
                         ?.addEventListener("change", (e) => {
-                            const lang = e.target.value;
-                            I18n.load(lang);
-                            localStorage.setItem("rt_lang", lang);
-                            this.#updateLangButtons(lang);
-                            showToast(I18n.t("toast.lang_changed"));
+                            this.#setLanguage(e.target.value);
+                        });
+
+                    document
+                        .getElementById("lang-select-quick")
+                        ?.addEventListener("change", (e) => {
+                            this.#setLanguage(e.target.value);
                         });
 
                     // Initialize audio on first user interaction
@@ -1897,9 +2040,7 @@
                     );
                     this.#setMusicStyle(settings.musicStyle || "classic");
                     this.#setMusicEnabled(
-                        settings.musicEnabled !== false
-                            ? settings.musicEnabled
-                            : true,
+                        settings.musicEnabled === true,
                         false,
                     );
 
@@ -1929,17 +2070,12 @@
 
                     this.#syncMusicStyle(settings.musicStyle || "classic");
                     this.#syncMusicToggle(
-                        settings.musicEnabled !== false
-                            ? settings.musicEnabled
-                            : true,
+                        settings.musicEnabled === true,
                     );
 
                     const musicToggle = document.getElementById("music-toggle");
                     if (musicToggle) {
-                        musicToggle.checked =
-                            settings.musicEnabled !== false
-                                ? settings.musicEnabled
-                                : true;
+                        musicToggle.checked = settings.musicEnabled === true;
                     }
 
                     const sfxToggle = document.getElementById("sfx-toggle");
@@ -1955,14 +2091,11 @@
                  * Update language button states
                  */
                 #updateLangButtons(lang) {
-                    document.querySelectorAll(".rt-lang-btn").forEach((btn) => {
-                        btn.classList.toggle(
-                            "active",
-                            btn.dataset.lang === lang,
-                        );
+                    ["lang-select", "lang-select-quick"].forEach((id) => {
+                        const langSelect = document.getElementById(id);
+                        if (langSelect) langSelect.value = lang;
                     });
-                    const langSelect = document.getElementById("lang-select");
-                    if (langSelect) langSelect.value = lang;
+                    this.#customSelects?.syncAll();
                 }
 
                 /**
@@ -1976,6 +2109,7 @@
                             if (selectEl) selectEl.value = value;
                         },
                     );
+                    this.#customSelects?.syncAll();
                 }
 
                 /**
@@ -2019,6 +2153,18 @@
                     }
                     this.#storage.updateSettings({ musicEnabled: enabled });
                     this.#syncMusicToggle(enabled);
+                }
+
+                /**
+                 * Set language globally and synchronize all selectors.
+                 * @param {string} lang - Locale code
+                 */
+                #setLanguage(lang) {
+                    I18n.load(lang);
+                    localStorage.setItem("tetrix_lang", lang);
+                    this.#updateLangButtons(lang);
+                    this.#ui?.refreshLocalizedContent();
+                    showToast(I18n.t("toast.lang_changed"));
                 }
 
                 /**
@@ -2107,7 +2253,7 @@
 
             // Initialize game when DOM is ready
             document.addEventListener("DOMContentLoaded", () => {
-                window.game = new RetroTetris();
+                window.game = new Tetrix();
             });
         </script>
     </body>

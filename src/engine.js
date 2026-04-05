@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * RetroTetris Game Engine
+ * Tetrix Game Engine
  * Implements official Tetris Guideline mechanics
  * @module engine
  */

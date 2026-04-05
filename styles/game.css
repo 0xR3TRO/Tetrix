@@ -1,5 +1,5 @@
 /* ============================================================================
-   RetroTetris - Game Styles
+   Tetrix - Game Styles
    Board, side panels, and game-specific UI
    ============================================================================ */
 
@@ -408,11 +408,11 @@
 
 /* Light theme adjustments for pause overlay */
 [data-theme="light"] #pause-overlay {
-    background: rgba(240, 242, 248, 0.92);
+    background: rgba(227, 236, 251, 0.92);
 }
 
 [data-theme="light"] .pause-btn {
-    background: rgba(221, 224, 240, 0.85);
+    background: rgba(213, 226, 247, 0.9);
 }
 
 /* ============================================================================
@@ -633,12 +633,12 @@
 [data-theme="light"] #game-container {
     background: linear-gradient(
         160deg,
-        rgba(238, 228, 196, 0.97),
-        rgba(225, 213, 178, 0.97)
+        rgba(232, 240, 255, 0.97),
+        rgba(212, 226, 247, 0.98)
     );
     box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.2),
-        0 0 0 1px rgba(160, 140, 100, 0.2);
+        0 20px 50px rgba(32, 58, 94, 0.2),
+        0 0 0 1px rgba(102, 136, 186, 0.26);
 }
 
 .game-layout {
@@ -667,8 +667,8 @@
 [data-theme="light"] .right-panel {
     background: linear-gradient(
         180deg,
-        rgba(220, 208, 172, 0.85),
-        rgba(207, 194, 158, 0.9)
+        rgba(218, 231, 250, 0.9),
+        rgba(198, 215, 242, 0.92)
     );
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
@@ -695,12 +695,12 @@
 }
 
 [data-theme="light"] .panel-section {
-    background: rgba(245, 235, 205, 0.6);
-    border-color: rgba(160, 140, 100, 0.3);
+    background: rgba(232, 241, 255, 0.66);
+    border-color: rgba(108, 146, 198, 0.35);
 }
 
 .panel-label {
-    font-size: 0.48rem;
+    font-size: 0.56rem;
     color: var(--rt-text-muted);
     margin-bottom: 0.3rem;
     letter-spacing: 0.15em;
@@ -726,7 +726,8 @@
 
 [data-theme="light"] .hold-container,
 [data-theme="light"] .next-container {
-    background: rgba(230, 220, 190, 0.6);
+    background: rgba(229, 239, 255, 0.66);
+    border-color: rgba(116, 148, 193, 0.36);
 }
 
 .hold-container {
@@ -779,8 +780,8 @@
 }
 
 [data-theme="light"] .board-container {
-    background: linear-gradient(180deg, #e4d8b5, #d8c9a0);
-    border-color: rgba(160, 140, 100, 0.5);
+    background: linear-gradient(180deg, #d9e8ff, #c3d8f8);
+    border-color: rgba(109, 145, 196, 0.58);
 }
 
 #game-canvas {
@@ -790,7 +791,8 @@
 }
 
 [data-theme="light"] #game-canvas {
-    background: #eadfbe;
+    background: #edf4ff;
+    border-color: rgba(108, 146, 197, 0.42);
 }
 
 #action-text {
@@ -818,7 +820,7 @@
 }
 
 [data-theme="light"] #pause-overlay {
-    background: rgba(233, 222, 189, 0.93);
+    background: rgba(219, 231, 251, 0.92);
 }
 
 .pause-title {
@@ -832,7 +834,7 @@
 }
 
 .pause-btn {
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     padding: 0.75rem 1rem;
 }
 
@@ -861,7 +863,7 @@
     border-radius: 10px;
     min-height: 50px;
     font-family: var(--rt-font-display);
-    font-size: 0.62rem;
+    font-size: 0.66rem;
     letter-spacing: 0.07em;
     touch-action: none;
     -webkit-tap-highlight-color: transparent;
@@ -893,10 +895,11 @@
 [data-theme="light"] .touch-btn {
     background: linear-gradient(
         175deg,
-        rgba(218, 207, 174, 0.95),
-        rgba(200, 187, 150, 0.95)
+        rgba(218, 231, 250, 0.96),
+        rgba(193, 212, 241, 0.97)
     );
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-color: rgba(105, 140, 192, 0.56);
+    box-shadow: 0 2px 0 rgba(27, 50, 85, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.66);
 }
 
 .touch-btn:active {

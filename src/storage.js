@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * RetroTetris Storage System
+ * Tetrix Storage System
  * LocalStorage persistence for scores, settings, and stats
  * @module storage
  */
@@ -11,9 +11,9 @@
 // ============================================================================
 
 const STORAGE_KEYS = {
-    HIGH_SCORES: "retro_tetris_scores",
-    SETTINGS: "retro_tetris_settings",
-    STATS: "retro_tetris_stats",
+    HIGH_SCORES: "tetrix_scores",
+    SETTINGS: "tetrix_settings",
+    STATS: "tetrix_stats",
 };
 
 /** Default settings */
@@ -28,7 +28,7 @@ const DEFAULT_SETTINGS = {
     musicVolume: 0.4,
     sfxVolume: 1.0,
     theme: "dark",
-    musicEnabled: true,
+    musicEnabled: false,
     sfxEnabled: true,
     musicStyle: "classic",
 };

@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * RetroTetris Audio System
+ * Tetrix Audio System
  * Procedural audio generation using Web Audio API
  * @module audio
  */
